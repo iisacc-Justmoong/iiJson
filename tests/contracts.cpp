@@ -1,6 +1,7 @@
 #include <iiJson/Json.h>
 #include <iostream>
 #include <limits>
+#include <optional>
 #include <stdexcept>
 using namespace ii::json;
 namespace {

@@ -9,6 +9,9 @@ iiJson 0.1.1 is a native C++23 JSON codec above `iiSDKCore::Contracts` 0.14.
 Core remains independent of codecs, storage, networking and Qt. This package
 imports no runtime, thread pool or file provider. It does not create files.
 
+The contract tests include `<optional>` directly when defining their optional
+settings field, so MSVC builds do not depend on libc++ transitive includes.
+
 ```cmake
 find_package(iiJson 0.1 CONFIG REQUIRED)
 target_link_libraries(app PRIVATE iiJson::iiJson)
