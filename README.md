@@ -1,6 +1,11 @@
 # iiJson
 
-iiJson 0.1.0 is a native C++23 JSON codec above `iiSDKCore::Contracts` 0.14.
+Package release: **0.1.1** (2026-10-19). This patch packages the current
+source snapshot; build, test and installation evidence is recorded in the SDK
+patch-release report. Earlier versioned feature notes remain historical.
+
+
+iiJson 0.1.1 is a native C++23 JSON codec above `iiSDKCore::Contracts` 0.14.
 Core remains independent of codecs, storage, networking and Qt. This package
 imports no runtime, thread pool or file provider. It does not create files.
 
