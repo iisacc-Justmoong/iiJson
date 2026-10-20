@@ -74,5 +74,13 @@ The independent consumer in `tests/consumer` disables Qt, Threads and provider
 discovery and checks that no Core runtime target was imported. Native and WASM
 build/execution evidence are recorded by the integration validation, separately.
 
-Original code is AGPL-3.0-only; see `LICENSE`. Grammar reference:
+Original code is MIT; see `LICENSE`. Grammar reference:
 [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259).
+
+## License
+
+SPDX-License-Identifier: MIT
+
+The original code and documentation in this repository are licensed under the
+[MIT License](LICENSE). Third-party code, libraries, fonts, tools, and model
+weights retain their respective licenses.
