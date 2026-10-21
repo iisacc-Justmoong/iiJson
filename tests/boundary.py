@@ -3,7 +3,7 @@ from pathlib import Path
 import re
 import sys
 root=Path(sys.argv[1])
-for folder in ('src','include'):
+for folder in ('src',):
     for path in (root/folder).rglob('*'):
         if path.suffix not in ('.h','.cpp'): continue
         for name in re.findall(r'#\s*include\s*[<"]([^>"]+)',path.read_text()):
