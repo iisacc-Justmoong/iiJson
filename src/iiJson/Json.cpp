@@ -1,5 +1,6 @@
 #include <iiJson/Json.h>
 #include <iiSDKCore/Core/Text/Text.h>
+#include <iiSDKCore/Core/Text/Number.h>
 #include <charconv>
 #include <cmath>
 #include <limits>
@@ -207,13 +208,16 @@ class Writer final {
         append("\"");
     }
     template<class Number> void number(Number value) {
+        if constexpr (std::floating_point<Number>) {
+            if(!std::isfinite(value))fail(ErrorCode::number_out_of_range,"Number must be finite");
+            const auto text=ii::core::format_decimal(value);append(text);
+            if(text.find_first_of(".eE")==text.npos)append(".0");
+        } else {
         char buffer[64];
         const auto result=std::to_chars(buffer,buffer+sizeof(buffer),value);
         if (result.ec!=std::errc{}) fail(ErrorCode::number_out_of_range,"Number cannot be formatted");
         const std::string_view text(buffer,std::size_t(result.ptr-buffer));
         append(text);
-        if constexpr (std::floating_point<Number>) {
-            if (text.find_first_of(".eE")==text.npos) append(".0");
         }
     }
     void value(const Value& tree,std::size_t depth) {

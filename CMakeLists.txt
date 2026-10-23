@@ -31,3 +31,5 @@ configure_package_config_file(cmake/iiJsonConfig.cmake.in "${CMAKE_CURRENT_BINAR
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfigVersion.cmake" VERSION ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfig.cmake" "${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfigVersion.cmake" DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/iiJson)
 install(FILES README.md LICENSE DESTINATION ${CMAKE_INSTALL_DATADIR}/iiJson)
+
+install(DIRECTORY docs/ DESTINATION ${CMAKE_INSTALL_DATADIR}/iiJson/docs)

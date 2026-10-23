@@ -41,6 +41,9 @@ int main() {
     check(parse("-9223372036854775808")->get<std::int64_t>()->get()==INT64_MIN);
     check(std::signbit(parse("-0.0")->get<double>()->get()));
     check(stringify(Value(-0.0)).value()=="-0.0");
+    check(stringify(Value(0.1)).value()=="0.1");
+    check(stringify(Value(1000.0)).value()=="1000.0");
+    check(parse(stringify(Value(1.0)).value())->get<double>().has_value());
     rejects("18446744073709551616",ErrorCode::number_out_of_range);
     rejects("-9223372036854775809",ErrorCode::number_out_of_range);
     rejects("1e9999",ErrorCode::number_out_of_range); rejects("1e-9999",ErrorCode::number_out_of_range);
