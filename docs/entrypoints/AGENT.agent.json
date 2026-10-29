@@ -1,0 +1,314 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:ff6984723c1da4c856c2abffb7abed57975bd04ef70a9c2fabc71c9b77960b85",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiJson",
+    "name": "iiJson",
+    "root": "SDK/iiJson",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "AGENT.md",
+    "sha256": "464a4eb5c9023f532c51d5ea9cf7f954aa049ab7bf688daadb801feca9bd6581",
+    "bytes": 3944,
+    "line_count": 32,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "iiJson 작업 지침",
+    "role": "instructions",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiJson 작업 지침\n",
+      "level": 1,
+      "title": "iiJson 작업 지침"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "iiJson은 Qt와 다른 SDK에 의존하지 않는 C++23 JSON 코덱과 도메인 스키마 라이브러리이다. 값·오류·UTF-8 계약은 모듈이 소유하며 Core Runtime, 파일 공급자, 네트워크, 스레드 및 GUI 계층을 참조하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "list",
+      "start_line": 5,
+      "end_line": 14,
+      "raw": "- 공개 헤더와 구현은 `src/iiJson/`에 함께 둔다. 별도 소스 `include/` 디렉터리를 만들지 않는다.\n- 기존 `parse`·`stringify`·`Codec<T>` 호출을 유지한다. 암묵적인 문자열·숫자 변환이나 누락 필드의 기본값 삽입을 추가하지 않는다.\n- 스키마는 소유권이 있는 불변 정의이다. 구성 요소를 조합할 때 원본 정의를 변경하거나 전역 레지스트리를 도입하지 않는다. 제품별 스키마와 업무 규칙은 소비자 모듈이 소유한다.\n- 온톨로지 계약은 `iiJson::Ontology` 타깃에 둔다. 의존 방향은 모듈 내 Ontology → iiJson이다. 기본 JSON·Schema 소스에서 Ontology 헤더를 참조하지 않는다. Core 값과의 변환은 별도 `example/CoreValue` 소비자가 명시적으로 담당한다.\n- 스키마 정의·온톨로지 manifest·스냅샷의 wire format 버전을 명시적으로 관리한다. 직렬화할 수 없는 native refinement를 누락하거나 임의 코드·원격 참조를 자동 실행하지 않는다. 선언된 읽기·쓰기 대상은 실행 권한의 증거가 아니다.\n- 카탈로그 컴파일과 스냅샷 생성은 완성된 불변 결과만 반환한다. 타입 참조, 인터페이스, 기본키, 관계의 양 끝과 카디널리티를 검사하고 전체 연산에 공유 예산을 적용한다.\n- 소스 변경에는 `tests/`의 계약 검사와 `docs/`의 한국어 문서 갱신이 필요하다. README는 영어로 유지한다. 공개 API 사용 예제는 `example/`에 둔다.\n- 모든 빌드와 생성물은 `build/` 하위에 둔다. 기존 빌드의 컴파일러·플랫폼·사용자 변경을 확인한 뒤 필요한 범위만 구성한다.\n- 변경 후 빌드 및 CTest를 수행한다. 공개 헤더·ABI를 변경하면 라이브러리와 소비자를 함께 다시 빌드한다. `./install.sh`는 기본적으로 `build/install`에 설치하고 Qt·Threads·파일 공급자 탐색을 비활성화한 독립 소비자를 검증한다.\n- 다른 플랫폼의 이전 검증 기록은 이 변경의 실행 근거가 아니다. 실제 실행한 플랫폼, 소스 빌드, 설치 소비자 및 미검증 범위를 구분하여 보고한다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "공개 헤더와 구현은 `src/iiJson/`에 함께 둔다. 별도 소스 `include/` 디렉터리를 만들지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "기존 `parse`·`stringify`·`Codec<T>` 호출을 유지한다. 암묵적인 문자열·숫자 변환이나 누락 필드의 기본값 삽입을 추가하지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "스키마는 소유권이 있는 불변 정의이다. 구성 요소를 조합할 때 원본 정의를 변경하거나 전역 레지스트리를 도입하지 않는다. 제품별 스키마와 업무 규칙은 소비자 모듈이 소유한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "온톨로지 계약은 `iiJson::Ontology` 타깃에 둔다. 의존 방향은 모듈 내 Ontology → iiJson이다. 기본 JSON·Schema 소스에서 Ontology 헤더를 참조하지 않는다. Core 값과의 변환은 별도 `example/CoreValue` 소비자가 명시적으로 담당한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "스키마 정의·온톨로지 manifest·스냅샷의 wire format 버전을 명시적으로 관리한다. 직렬화할 수 없는 native refinement를 누락하거나 임의 코드·원격 참조를 자동 실행하지 않는다. 선언된 읽기·쓰기 대상은 실행 권한의 증거가 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "카탈로그 컴파일과 스냅샷 생성은 완성된 불변 결과만 반환한다. 타입 참조, 인터페이스, 기본키, 관계의 양 끝과 카디널리티를 검사하고 전체 연산에 공유 예산을 적용한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "소스 변경에는 `tests/`의 계약 검사와 `docs/`의 한국어 문서 갱신이 필요하다. README는 영어로 유지한다. 공개 API 사용 예제는 `example/`에 둔다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "모든 빌드와 생성물은 `build/` 하위에 둔다. 기존 빌드의 컴파일러·플랫폼·사용자 변경을 확인한 뒤 필요한 범위만 구성한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "변경 후 빌드 및 CTest를 수행한다. 공개 헤더·ABI를 변경하면 라이브러리와 소비자를 함께 다시 빌드한다. `./install.sh`는 기본적으로 `build/install`에 설치하고 Qt·Threads·파일 공급자 탐색을 비활성화한 독립 소비자를 검증한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "다른 플랫폼의 이전 검증 기록은 이 변경의 실행 근거가 아니다. 실제 실행한 플랫폼, 소스 빌드, 설치 소비자 및 미검증 범위를 구분하여 보고한다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "html",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "<!-- workspace-docs:agent:start -->\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "heading",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "## 문서 구조와 에이전트 탐색\n",
+      "level": 2,
+      "title": "문서 구조와 에이전트 탐색"
+    },
+    {
+      "id": "b000009",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "list",
+      "start_line": 19,
+      "end_line": 25,
+      "raw": "- 프로젝트 루트의 `README.md`는 사람용 영문 진입 문서이며 `AGENT.md`는 에이전트 진입점이다.\n- 하위 인간용 Markdown과 구조화된 agent JSON을 함께 유지한다. Markdown이 원본이며 JSON은 원문 해시와 줄 범위를 가진 파생 문서이다.\n- 먼저 [docs/agent-index.json](docs/agent-index.json)에서 관련 문서와 JSON 투영을 찾는다. 원문 SHA-256이 다르면 현재 Markdown을 읽고 투영을 갱신한다.\n- JSON의 규칙 후보는 검색용 어휘 일치 결과이다. 과거 기록·예제·실패 상태를 현재 지시나 검증 완료로 자동 해석하지 않는다.\n- 기존 프로젝트별 규칙, 동결된 증거, 라이선스, 외부 원본, 사용자 데이터와 다른 작업의 변경을 보존한다.\n- 이 문서 재편 지침은 과거 작업의 기능 구현·배포를 자동 재개하라는 요청이 아니다. 현재 사용자의 작업 범위를 우선한다.\n- 문서를 수정하면 JSON 쌍·색인을 함께 갱신하고 검증한다. 기존 소스 변경에 대한 빌드·테스트 규칙은 계속 따른다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "프로젝트 루트의 `README.md`는 사람용 영문 진입 문서이며 `AGENT.md`는 에이전트 진입점이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "하위 인간용 Markdown과 구조화된 agent JSON을 함께 유지한다. Markdown이 원본이며 JSON은 원문 해시와 줄 범위를 가진 파생 문서이다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "먼저 [docs/agent-index.json](docs/agent-index.json)에서 관련 문서와 JSON 투영을 찾는다. 원문 SHA-256이 다르면 현재 Markdown을 읽고 투영을 갱신한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "JSON의 규칙 후보는 검색용 어휘 일치 결과이다. 과거 기록·예제·실패 상태를 현재 지시나 검증 완료로 자동 해석하지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "기존 프로젝트별 규칙, 동결된 증거, 라이선스, 외부 원본, 사용자 데이터와 다른 작업의 변경을 보존한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "이 문서 재편 지침은 과거 작업의 기능 구현·배포를 자동 재개하라는 요청이 아니다. 현재 사용자의 작업 범위를 우선한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "문서를 수정하면 JSON 쌍·색인을 함께 갱신하고 검증한다. 기존 소스 변경에 대한 빌드·테스트 규칙은 계속 따른다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000011",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "paragraph",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "Workspace에서 이 프로젝트의 문서를 갱신하는 명령은 다음과 같다.\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "fenced_code",
+      "start_line": 29,
+      "end_line": 31,
+      "raw": "```sh\npython3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiJson\n```\n",
+      "language": "sh",
+      "code": "python3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiJson\n",
+      "closed": true
+    },
+    {
+      "id": "b000015",
+      "kind": "html",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "<!-- workspace-docs:agent:end -->\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiJson 작업 지침",
+      "anchor": "iijson-작업-지침",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000008",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "문서 구조와 에이전트 탐색",
+      "anchor": "문서-구조와-에이전트-탐색",
+      "start_line": 17
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "iiJson은 Qt와 다른 SDK에 의존하지 않는 C++23 JSON 코덱과 도메인 스키마 라이브러리이다. 값·오류·UTF-8 계약은 모듈이 소유하며 Core Runtime, 파일 공급자, 네트워크, 스레드 및 GUI 계층을 참조하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000005",
+        "line": 6,
+        "text": "- 기존 `parse`·`stringify`·`Codec<T>` 호출을 유지한다. 암묵적인 문자열·숫자 변환이나 누락 필드의 기본값 삽입을 추가하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000005",
+        "line": 7,
+        "text": "- 스키마는 소유권이 있는 불변 정의이다. 구성 요소를 조합할 때 원본 정의를 변경하거나 전역 레지스트리를 도입하지 않는다. 제품별 스키마와 업무 규칙은 소비자 모듈이 소유한다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000005",
+        "line": 8,
+        "text": "- 온톨로지 계약은 `iiJson::Ontology` 타깃에 둔다. 의존 방향은 모듈 내 Ontology → iiJson이다. 기본 JSON·Schema 소스에서 Ontology 헤더를 참조하지 않는다. Core 값과의 변환은 별도 `example/CoreValue` 소비자가 명시적으로 담당한다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000005",
+        "line": 9,
+        "text": "- 스키마 정의·온톨로지 manifest·스냅샷의 wire format 버전을 명시적으로 관리한다. 직렬화할 수 없는 native refinement를 누락하거나 임의 코드·원격 참조를 자동 실행하지 않는다. 선언된 읽기·쓰기 대상은 실행 권한의 증거가 아니다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000010",
+        "line": 22,
+        "text": "- JSON의 규칙 후보는 검색용 어휘 일치 결과이다. 과거 기록·예제·실패 상태를 현재 지시나 검증 완료로 자동 해석하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      }
+    ],
+    "commands": [
+      {
+        "block_id": "b000014",
+        "language": "sh",
+        "code": "python3 ../../Engineering/WorkspaceDocumentation/App/workspace_docs.py --workspace ../.. sync --project SDK/iiJson\n"
+      }
+    ],
+    "links": [
+      {
+        "block_id": "b000010",
+        "label": "docs/agent-index.json",
+        "target": "docs/agent-index.json",
+        "kind": "relative",
+        "line": 21
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

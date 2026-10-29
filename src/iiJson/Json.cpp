@@ -1,8 +1,8 @@
 #include <iiJson/Json.h>
-#include <iiSDKCore/Core/Text/Text.h>
-#include <iiSDKCore/Core/Text/Number.h>
+#include <algorithm>
 #include <charconv>
 #include <cmath>
+#include <iomanip>
 #include <limits>
 #include <locale>
 #include <sstream>
@@ -30,9 +30,43 @@ template<class T> bool readReal(const char* begin,const char* end,T& value) {
         return true;
     }
 }
+void appendScalar(std::string& out,char32_t scalar) {
+    if (scalar<0x80) out.push_back(char(scalar));
+    else if (scalar<0x800) { out.push_back(char(0xc0|(scalar>>6))); out.push_back(char(0x80|(scalar&63))); }
+    else if (scalar<0x10000) { out.push_back(char(0xe0|(scalar>>12))); out.push_back(char(0x80|((scalar>>6)&63))); out.push_back(char(0x80|(scalar&63))); }
+    else { out.push_back(char(0xf0|(scalar>>18))); out.push_back(char(0x80|((scalar>>12)&63))); out.push_back(char(0x80|((scalar>>6)&63))); out.push_back(char(0x80|(scalar&63))); }
+}
+// Use a classic-locale stream so number output remains independent of the
+// process locale and floating charconv availability on older platform SDKs.
+std::string formatReal(double value) {
+    auto render=[&](int precision,std::ios_base::fmtflags mode) {
+        std::ostringstream out;
+        out.imbue(std::locale::classic());
+        out.setf(mode,std::ios_base::floatfield);
+        out<<std::setprecision(precision)<<value;
+        return out.str();
+    };
+    auto roundtrips=[&](const std::string& text) {
+        double decoded{};
+        return readReal(text.data(),text.data()+text.size(),decoded) && decoded==value;
+    };
+    int low=1,high=std::numeric_limits<double>::max_digits10;
+    while (low<high) {
+        const int middle=(low+high)/2;
+        if (roundtrips(render(middle,{}))) high=middle; else low=middle+1;
+    }
+    auto result=render(low,{});
+    auto scientific=render(low-1,std::ios_base::scientific);
+    if (scientific.size()<result.size() && roundtrips(scientific)) result=std::move(scientific);
+    const int exponent=value==0 ? 0 : int(std::floor(std::log10(std::abs(value))));
+    auto fixed=render(std::max(0,low-1-exponent),std::ios_base::fixed);
+    if (fixed.size()<result.size() && roundtrips(fixed)) result=std::move(fixed);
+    return result;
+}
 class Parser final {
     std::string_view input;
     Limits limits;
+    DuplicateKeyPolicy duplicateKeys;
     std::size_t offset=0,items=0;
     [[noreturn]] void fail(ErrorCode code,const char* message,std::size_t at=SIZE_MAX) const {
         if (at==SIZE_MAX) at=offset;
@@ -82,14 +116,16 @@ class Parser final {
                     case 'r': result.push_back('\r'); break;
                     case 't': result.push_back('\t'); break;
                     case 'u': {
-                        std::u16string units(1,char16_t(hex()));
-                        if (units[0]>=0xd800 && units[0]<=0xdbff) {
+                        char32_t scalar=hex();
+                        if (scalar>=0xd800 && scalar<=0xdbff) {
                             if (!take('\\') || !take('u')) fail(ErrorCode::syntax,"Unpaired high surrogate");
-                            units.push_back(char16_t(hex()));
+                            const char32_t low=hex();
+                            if (low<0xdc00 || low>0xdfff) fail(ErrorCode::syntax,"Unpaired high surrogate");
+                            scalar=0x10000+((scalar-0xd800)<<10)+(low-0xdc00);
+                        } else if (scalar>=0xdc00 && scalar<=0xdfff) {
+                            fail(ErrorCode::syntax,"Unpaired low surrogate");
                         }
-                        auto encoded=core::to_utf8(units);
-                        if (!encoded) fail(ErrorCode::syntax,"Unpaired Unicode surrogate");
-                        result+=*encoded;
+                        appendScalar(result,scalar);
                         break;
                     }
                     default: fail(ErrorCode::syntax,"Unknown JSON escape",offset-1);
@@ -148,9 +184,13 @@ class Parser final {
             whitespace(); if (take('}')) return Value(std::move(result));
             do {
                 whitespace(); item(); const auto at=offset; auto key=text();
-                if (result.contains(key)) fail(ErrorCode::duplicate_key,"Duplicate decoded JSON key",at);
+                const auto previous=result.find(key);
+                if (previous!=result.end() && duplicateKeys==DuplicateKeyPolicy::reject)
+                    fail(ErrorCode::duplicate_key,"Duplicate decoded JSON key",at);
                 whitespace(); if (!take(':')) fail(ErrorCode::syntax,"Expected object colon");
-                auto entry=value(depth+1); result.emplace(std::move(key),std::move(entry));
+                auto entry=value(depth+1);
+                if (previous!=result.end()) previous->second=std::move(entry);
+                else result.emplace(std::move(key),std::move(entry));
                 whitespace(); if (take('}')) return Value(std::move(result));
             } while (take(','));
             fail(ErrorCode::syntax,"Expected comma or closing brace");
@@ -164,14 +204,13 @@ class Parser final {
         return number();
     }
 public:
-    Parser(std::string_view source,Limits policy):input(source),limits(policy){}
+    Parser(std::string_view source,Limits policy,DuplicateKeyPolicy duplicates)
+        :input(source),limits(policy),duplicateKeys(duplicates){}
     Value parse() {
         if (input.size()>limits.input_bytes) fail(ErrorCode::limit_exceeded,"JSON input byte limit exceeded",0);
         if (limits.depth>maximumDepth) fail(ErrorCode::limit_exceeded,"JSON depth configuration exceeds hard ceiling",0);
-        if (!core::valid_utf8(input)) {
-            auto invalid=core::to_utf16(input);
-            fail(ErrorCode::invalid_utf8,"JSON requires valid UTF-8",invalid.error().offset);
-        }
+        if (const auto invalid=detail::invalid_utf8(input))
+            fail(ErrorCode::invalid_utf8,"JSON requires valid UTF-8",*invalid);
         auto result=value(1); whitespace();
         if (offset!=input.size()) fail(ErrorCode::syntax,"Trailing JSON data");
         return result;
@@ -210,7 +249,7 @@ class Writer final {
     template<class Number> void number(Number value) {
         if constexpr (std::floating_point<Number>) {
             if(!std::isfinite(value))fail(ErrorCode::number_out_of_range,"Number must be finite");
-            const auto text=ii::core::format_decimal(value);append(text);
+            const auto text=formatReal(value);append(text);
             if(text.find_first_of(".eE")==text.npos)append(".0");
         } else {
         char buffer[64];
@@ -249,7 +288,14 @@ public:
 };
 }
 Result<Value> parse(std::string_view input,Limits limits) {
-    try { return Parser(input,limits).parse(); } catch (const Error& error) { return std::unexpected(error); }
+    return parse_with_duplicate_keys(input,DuplicateKeyPolicy::reject,limits);
+}
+Result<Value> parse_with_duplicate_keys(std::string_view input,DuplicateKeyPolicy policy,Limits limits) {
+    try {
+        if (policy!=DuplicateKeyPolicy::reject && policy!=DuplicateKeyPolicy::last_wins)
+            throw Error{ErrorCode::unsupported_value,0,1,1,"Invalid duplicate key policy"};
+        return Parser(input,limits,policy).parse();
+    } catch (const Error& error) { return std::unexpected(error); }
 }
 Result<std::string> stringify(const Value& value,Limits limits) {
     try { return Writer(limits).write(value); } catch (const Error& error) { return std::unexpected(error); }

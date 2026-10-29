@@ -53,14 +53,14 @@ int main() {
     check(parse("\"\\ud83c\\udfb5\"")->get<std::string>()->get()=="🎵");
     check(parse("\"a\\u0000b\"")->get<std::string>()->get()==std::string("a\0b",3));
     auto value=parse("{\"null\":null,\"empty\":\"\",\"array\":[],\"false\":false}").value();
-    check(value.find("null")->get().kind()==ii::core::ValueKind::null && !value.find("absent"));
+    check(value.find("null")->get().kind()==ii::json::ValueKind::null && !value.find("absent"));
     check(stringify(value).value()=="{\"array\":[],\"empty\":\"\",\"false\":false,\"null\":null}");
     Limits limits; limits.depth=2; check(parse("[[]]",limits).has_value()); check(!parse("[[[]]]",limits));
     limits={}; limits.input_bytes=2; check(!parse("null",limits));
     limits={}; limits.string_bytes=1; check(!parse("\"ab\"",limits)); check(!stringify(Value("ab"),limits));
     limits={}; limits.items=2; check(!parse("[1,2]",limits)); check(!stringify(Value(Value::Array{Value(1),Value(2)}),limits));
     limits={}; limits.output_bytes=3; check(!stringify(Value(),limits));
-    check(!stringify(Value(ii::core::Bytes{std::byte{1}})));
+    check(!stringify(Value(ii::json::Bytes{std::byte{1}})));
     const auto position=parse("[\n true,\n ]").error(); check(position.line==3 && position.offset==10 && position.column==2);
     check(encode(Settings{}).value()=="{\"schemaVersion\":1}");
     check(encode(Settings{1,std::string{}}).value()=="{\"schemaVersion\":1,\"title\":\"\"}");

@@ -1,0 +1,5 @@
+@PACKAGE_INIT@
+include(CMakeFindDependencyMacro)
+find_dependency(iiJson 0.1 CONFIG)
+find_dependency(iiSDKCore 0.14 CONFIG COMPONENTS Contracts)
+include("${CMAKE_CURRENT_LIST_DIR}/iiJsonCoreValueTargets.cmake")

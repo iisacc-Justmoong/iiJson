@@ -1,0 +1,97 @@
+{
+  "format": "iisacc.agent-document-index",
+  "schema_version": 1,
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiJson",
+    "name": "iiJson",
+    "root": "SDK/iiJson",
+    "kind": "sdk"
+  },
+  "documentation_root": "docs",
+  "agent_schema": "docs/agent-document.schema.json",
+  "documents": [
+    {
+      "document_id": "urn:iisacc:document:ff6984723c1da4c856c2abffb7abed57975bd04ef70a9c2fabc71c9b77960b85",
+      "source": "AGENT.md",
+      "agent_json": "docs/entrypoints/AGENT.agent.json",
+      "source_sha256": "464a4eb5c9023f532c51d5ea9cf7f954aa049ab7bf688daadb801feca9bd6581",
+      "role": "instructions"
+    },
+    {
+      "document_id": "urn:iisacc:document:06d3c05d1617ee52fbcf712682dd44bf99ad32eaf535886eb6dafe09920f1ce9",
+      "source": "README.md",
+      "agent_json": "docs/entrypoints/README.agent.json",
+      "source_sha256": "7bf61316f1065f49e920b3d8ca16b5894907e0dc8ce8897a9278b0f8fac5d539",
+      "role": "overview"
+    },
+    {
+      "document_id": "urn:iisacc:document:d2befb2e8c309302e84f2825edb8ba37731cb149d82881d55cf4589fb049cc2e",
+      "source": "docs/README.md",
+      "agent_json": "docs/README.agent.json",
+      "source_sha256": "1768eeba59a1e7aaf90a947919adec751bf032aaf6ee1add899530e53bb2ae0a",
+      "role": "overview"
+    },
+    {
+      "document_id": "urn:iisacc:document:97216107b06716e21b18d7b06a454f19686f9fb2f7b80b6c1aa65244bc599a5d",
+      "source": "docs/WindowsBuildAndRun.md",
+      "agent_json": "docs/WindowsBuildAndRun.agent.json",
+      "source_sha256": "38344704c0b24cda2788d21588d00a47b75d6486b7ef9f773406f36cdeea792a",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:991aeccbf19b1b1612b4a61dc7f92a70b6aceb7011c8c3772abe8c5f6a741ec2",
+      "source": "docs/documentation-structure.md",
+      "agent_json": "docs/documentation-structure.agent.json",
+      "source_sha256": "ff336cde6f18cb60ba41800d7a84a04ab3a84b7042aa07a25615e2daca13dff6",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:42de639158cd6e2729248bce884f9099a05251956c4fe7b442ac6c819f27101a",
+      "source": "docs/domain-schema.md",
+      "agent_json": "docs/domain-schema.agent.json",
+      "source_sha256": "afb165d7653e55f213431d6696b1d54901e57f166337bcd1e26193c74f7a84b5",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:994abf7f4e1fa16ba794de1cd886f52eefa3554554d9d7e7884409e6a4ac4af3",
+      "source": "docs/duplicate-key-policy.md",
+      "agent_json": "docs/duplicate-key-policy.agent.json",
+      "source_sha256": "ae31563e973d55a29682a486a94376ee5969f5aa95c81fe7a3743f464fc58133",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:22ddd6c85be785071e7cbc6c551fbc6d6d91d83c41a36ed33a819e73a8ab81df",
+      "source": "docs/native-numbers.md",
+      "agent_json": "docs/native-numbers.agent.json",
+      "source_sha256": "ca667d74cfd92d89dd4b452eeb6e54b34934e73b5b5c0f2f7a6a803dde482a65",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:4d76f61c86b17b162f7c40fc4165573cafd5f45f7102060804488dbbe7fec73f",
+      "source": "docs/ontology.md",
+      "agent_json": "docs/ontology.agent.json",
+      "source_sha256": "44bd10dd1fc38d263e183703e0e3c166605d69331e6aade83f8df0d424e7082a",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:b1f27bab33d44a1a3494a090cfc18828f7703d564d13aa952cd8edfdd9bf5c0a",
+      "source": "docs/sdk-independence.md",
+      "agent_json": "docs/sdk-independence.agent.json",
+      "source_sha256": "aad3e29472de27ecea914e5565b2dd097296b144ec93cf7c500ce0920e652c9b",
+      "role": "guide"
+    }
+  ],
+  "layout": {
+    "human_entry": "README.md",
+    "agent_entry": "AGENT.md",
+    "human_format": "markdown",
+    "agent_format": "structured_json",
+    "source_authority": "markdown"
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

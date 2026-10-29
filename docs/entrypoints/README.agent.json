@@ -1,0 +1,855 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:06d3c05d1617ee52fbcf712682dd44bf99ad32eaf535886eb6dafe09920f1ce9",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiJson",
+    "name": "iiJson",
+    "root": "SDK/iiJson",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "README.md",
+    "sha256": "7bf61316f1065f49e920b3d8ca16b5894907e0dc8ce8897a9278b0f8fac5d539",
+    "bytes": 10078,
+    "line_count": 204,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "iiJson",
+    "role": "overview",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiJson\n",
+      "level": 1,
+      "title": "iiJson"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "[Windows build and execution](docs/WindowsBuildAndRun.md)\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 7,
+      "raw": "Package version: **0.1.2**. This patch adds an explicit last-key-wins parsing\npolicy for compatible legacy formats while retaining strict parsing by default.\nEarlier versioned feature notes remain historical.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 9,
+      "raw": "\n\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 10,
+      "end_line": 13,
+      "raw": "iiJson provides native C++23 JSON, domain schemas and optional ontology\ncontracts independently of other SDK modules. The JSON value tree, error\ncontract and UTF-8 validation belong to this module. It imports no Core,\nruntime, thread pool, file provider or Qt package and does not create files.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 16,
+      "raw": "The contract tests include `<optional>` directly when defining their optional\nsettings field, so MSVC builds do not depend on libc++ transitive includes.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "fenced_code",
+      "start_line": 18,
+      "end_line": 21,
+      "raw": "```cmake\nfind_package(iiJson 0.1 CONFIG REQUIRED)\ntarget_link_libraries(app PRIVATE iiJson::iiJson)\n```\n",
+      "language": "cmake",
+      "code": "find_package(iiJson 0.1 CONFIG REQUIRED)\ntarget_link_libraries(app PRIVATE iiJson::iiJson)\n",
+      "closed": true
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "fenced_code",
+      "start_line": 23,
+      "end_line": 28,
+      "raw": "```cpp\n#include <iiJson/Json.h>\nauto tree = ii::json::parse(R\"({\"schemaVersion\":1,\"title\":null})\");\nif (!tree) { /* inspect code, byte offset, line, column and message */ }\nauto bytes = ii::json::stringify(*tree);\n```\n",
+      "language": "cpp",
+      "code": "#include <iiJson/Json.h>\nauto tree = ii::json::parse(R\"({\"schemaVersion\":1,\"title\":null})\");\nif (!tree) { /* inspect code, byte offset, line, column and message */ }\nauto bytes = ii::json::stringify(*tree);\n",
+      "closed": true
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 30,
+      "end_line": 43,
+      "raw": "The codec implements an RFC 8259 profile: UTF-8 only, no BOM, comments or trailing\ncommas, no duplicate decoded keys, no unpaired surrogates, no nonfinite numbers.\nEscaped NUL is preserved. Missing keys, explicit null, false, empty strings and\nempty containers remain distinct. Integers require exact signed/unsigned 64-bit\nrange; nonnegative values up to INT64_MAX decode as signed integers, larger ones\nas unsigned. Integer overflow never falls back to double. Decimal/exponent tokens\ndecode to finite binary64; underflow and overflow are rejected. Binary64 rounding\notherwise follows the target standard library. Targets without floating\n`from_chars` use a private classic-locale stream, with the same overflow,\nunderflow-to-zero and representable-subnormal tests; no process locale changes.\nOutput uses a locale-independent classic stream, retains\na decimal/exponent marker for real values (including negative zero), UTF-8 byte\nkey order and compact escapes. JSON cannot retain small positive integers' C++\nsigned/unsigned distinction. Binary Value alternatives require a domain encoding.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 45,
+      "end_line": 50,
+      "raw": "`Limits` bounds input bytes, output bytes, decoded bytes per string, total items\n(each value and object key), and depth. The root has depth one, including scalars;\nthe hard ceiling is 256. Defaults are 8 MiB input/output, 1 MiB per string,\n100,000 items, depth 64. No partial document/output is returned on failure. Bad\nallocation is an exception; grammar/policy errors are `expected` errors. Parsing\ndoes not normalize Unicode, interpret paths/URLs, infer dates or coerce DTOs.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 52,
+      "end_line": 58,
+      "raw": "Formats with an existing last-key-wins contract may explicitly call\n`parse_with_duplicate_keys(text, DuplicateKeyPolicy::last_wins, limits)`.\nNormal `parse`, schema parsing and `Codec<T>` remain strict. Every repeated\nvalue still consumes the normal grammar and resource limits; validate the\nreturned value separately when the legacy format also needs a schema. See the\n[duplicate-key policy](docs/duplicate-key-policy.md) and\n[example](example/legacy-duplicate-policy.cpp).\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 59,
+      "end_line": 59,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 60,
+      "end_line": 63,
+      "raw": "Specialize `ii::json::Codec<T>` with explicit `encode(const T&) -> Result<Value>`\nand `decode(const Value&) -> Result<T>`. `encode<T>` / `decode<T>` apply the\nbounded text codec around these conversions. Existing manual codecs remain\nsupported; see `tests/contracts.cpp`.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 64,
+      "end_line": 64,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "heading",
+      "start_line": 65,
+      "end_line": 65,
+      "raw": "## Domain schemas\n",
+      "level": 2,
+      "title": "Domain schemas"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 66,
+      "end_line": 66,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 67,
+      "end_line": 70,
+      "raw": "Include `<iiJson/Schema.h>` to declare owned, immutable domain schemas. Compose\nrequired/optional fields, nested objects and arrays, nullable values, numeric\nranges, Unicode string lengths, literals, enumerations, exactly-one alternatives\nand custom business rules. Unknown object fields are rejected by default.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 71,
+      "end_line": 71,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "fenced_code",
+      "start_line": 72,
+      "end_line": 84,
+      "raw": "```cpp\n#include <iiJson/Schema.h>\nusing namespace ii::json;\nconst auto schema = Schema::object({\n    Field::required(\"schemaVersion\", Schema::literal(Value(1))),\n    Field::required(\"title\", Schema::string({1, 80})),\n    Field::optional(\"comment\", Schema::string().nullable())\n});\nauto project = parse(R\"({\"schemaVersion\":1,\"title\":\"First film\"})\", schema);\nif (project) {\n    auto output = stringify(*project, schema);\n}\n```\n",
+      "language": "cpp",
+      "code": "#include <iiJson/Schema.h>\nusing namespace ii::json;\nconst auto schema = Schema::object({\n    Field::required(\"schemaVersion\", Schema::literal(Value(1))),\n    Field::required(\"title\", Schema::string({1, 80})),\n    Field::optional(\"comment\", Schema::string().nullable())\n});\nauto project = parse(R\"({\"schemaVersion\":1,\"title\":\"First film\"})\", schema);\nif (project) {\n    auto output = stringify(*project, schema);\n}\n",
+      "closed": true
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 85,
+      "end_line": 85,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 86,
+      "end_line": 94,
+      "raw": "Validation returns `Result<void>` and reports an RFC 6901 pointer in\n`Error::path`, such as `/tracks/0/name`. It neither inserts missing values nor\ncoerces types. Document resource limits also apply to unrestricted/unknown\nfields; `Limits::schema_steps` independently bounds schema evaluation.\nAdding `static const Schema& schema()` or `static Schema schema()` to a `Codec<T>`\nautomatically validates decoded trees before DTO conversion and encoded trees\nbefore JSON output. The runnable [domain example](example/domain-schema.cpp)\nshows the complete integration. See the Korean\n[domain schema contract](docs/domain-schema.md) for exact semantics and limits.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 95,
+      "end_line": 95,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 96,
+      "end_line": 99,
+      "raw": "These are native C++ domain contracts; loading external JSON Schema documents\nor resolving remote references is outside this API. Qt, storage and Core Runtime\ndependencies remain absent. Rebuild consumers together with the library because\nthe public error and limits structures gained fields.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 100,
+      "end_line": 100,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "paragraph",
+      "start_line": 101,
+      "end_line": 105,
+      "raw": "Schema definitions can also be exported with `schema.definition()` and restored\nwith `Schema::from_definition(value)`, or encoded using `Codec<Schema>`.\nThe versioned format preserves validation semantics and rejects native\nrefinements instead of silently discarding them. `SchemaBudget` shares an\nevaluation budget across multiple validations.\n"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 106,
+      "end_line": 106,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "heading",
+      "start_line": 107,
+      "end_line": 107,
+      "raw": "## Ontology contracts\n",
+      "level": 2,
+      "title": "Ontology contracts"
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 108,
+      "end_line": 108,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 109,
+      "end_line": 116,
+      "raw": "The separate `iiJson::Ontology` target provides a portable semantic contract layer\ninspired by the object, property, link, interface and operation concepts of the\n[Palantir Ontology](https://www.palantir.com/docs/foundry/ontology/overview).\nIt adds reusable value types and semantic properties, polymorphic object types,\ntyped links with cardinality constraints, and action/function input, output and\ncapability declarations. Compiled catalogs and validated graph snapshots are\nowned and immutable. Snapshots support indexed object lookup and bounded,\ndirectional relationship traversal.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 117,
+      "end_line": 117,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "fenced_code",
+      "start_line": 118,
+      "end_line": 121,
+      "raw": "```cmake\nfind_package(iiJson 0.1 CONFIG REQUIRED COMPONENTS Ontology)\ntarget_link_libraries(app PRIVATE iiJson::Ontology)\n```\n",
+      "language": "cmake",
+      "code": "find_package(iiJson 0.1 CONFIG REQUIRED COMPONENTS Ontology)\ntarget_link_libraries(app PRIVATE iiJson::Ontology)\n",
+      "closed": true
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 122,
+      "end_line": 122,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 123,
+      "end_line": 127,
+      "raw": "Include `<iiJson/Ontology.h>` and use `ii::json::ontology::Catalog::compile` to\nvalidate a `Definition`. `encode(catalog)` / `decode<Catalog>(text)` exchange\nversioned manifests. `catalog.snapshot(data)` validates object identities,\ninterfaces, link endpoints, duplicate edges and both cardinality bounds before\nreturning a snapshot. Snapshot documents bind to an ontology ID and revision.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 128,
+      "end_line": 128,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 129,
+      "end_line": 134,
+      "raw": "The [creation example](example/creation-ontology.cpp) demonstrates a Project/Asset\nmodel, shared properties, an interface-based relationship, traversal, portable\nround trips and publish-action argument validation. The Korean\n[ontology contract](docs/ontology.md) documents the format, limits and extension\nboundaries. Execution, storage, authorization and inference belong to consumer\nmodules; read/write declarations are descriptive contracts, not permissions.\n"
+    },
+    {
+      "id": "b000044",
+      "kind": "blank",
+      "start_line": 135,
+      "end_line": 135,
+      "raw": "\n"
+    },
+    {
+      "id": "b000045",
+      "kind": "paragraph",
+      "start_line": 136,
+      "end_line": 138,
+      "raw": "The dependency direction within this module is Ontology → iiJson. Existing codec\nusers keep linking `iiJson::iiJson` without an ontology dependency. Neither target\nimports Core, Qt, storage, network or thread-pool packages.\n"
+    },
+    {
+      "id": "b000046",
+      "kind": "blank",
+      "start_line": 139,
+      "end_line": 139,
+      "raw": "\n"
+    },
+    {
+      "id": "b000047",
+      "kind": "paragraph",
+      "start_line": 140,
+      "end_line": 144,
+      "raw": "This output is not declared byte-compatible with Qt JSON or an RFC 8785 canonical\nencoding. Do not change Sync's hash input to this writer without format/version\nmigration. The first consumer, iiCSMIDI, uses it to validate an embedded metadata\nboundary while the existing Native authorship codec retains stored schema and\nformat semantics.\n"
+    },
+    {
+      "id": "b000048",
+      "kind": "blank",
+      "start_line": 145,
+      "end_line": 145,
+      "raw": "\n"
+    },
+    {
+      "id": "b000049",
+      "kind": "paragraph",
+      "start_line": 146,
+      "end_line": 146,
+      "raw": "Build, test and stage under `build/`:\n"
+    },
+    {
+      "id": "b000050",
+      "kind": "blank",
+      "start_line": 147,
+      "end_line": 147,
+      "raw": "\n"
+    },
+    {
+      "id": "b000051",
+      "kind": "fenced_code",
+      "start_line": 148,
+      "end_line": 155,
+      "raw": "```sh\ncmake -S . -B build -DCMAKE_BUILD_TYPE=Release \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_iiSDKCore=ON -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=ON \\\n  -DCMAKE_INSTALL_PREFIX=\"$PWD/build/install\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure\ncmake --install build\n```\n",
+      "language": "sh",
+      "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_iiSDKCore=ON -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=ON \\\n  -DCMAKE_INSTALL_PREFIX=\"$PWD/build/install\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure\ncmake --install build\n",
+      "closed": true
+    },
+    {
+      "id": "b000052",
+      "kind": "blank",
+      "start_line": 156,
+      "end_line": 156,
+      "raw": "\n"
+    },
+    {
+      "id": "b000053",
+      "kind": "paragraph",
+      "start_line": 157,
+      "end_line": 158,
+      "raw": "Alternatively, run `./install.sh` to build, test, stage under `build/install`,\nand run the independent installed consumer.\n"
+    },
+    {
+      "id": "b000054",
+      "kind": "blank",
+      "start_line": 159,
+      "end_line": 159,
+      "raw": "\n"
+    },
+    {
+      "id": "b000055",
+      "kind": "paragraph",
+      "start_line": 160,
+      "end_line": 162,
+      "raw": "The independent consumer in `tests/consumer` disables Qt, Threads and provider\nand Core discovery and checks that no Core target was imported. Native and WASM\nbuild/execution evidence are recorded by the integration validation, separately.\n"
+    },
+    {
+      "id": "b000056",
+      "kind": "blank",
+      "start_line": 163,
+      "end_line": 163,
+      "raw": "\n"
+    },
+    {
+      "id": "b000057",
+      "kind": "paragraph",
+      "start_line": 164,
+      "end_line": 165,
+      "raw": "Original code is MIT; see `LICENSE`. Grammar reference:\n[RFC 8259](https://www.rfc-editor.org/rfc/rfc8259).\n"
+    },
+    {
+      "id": "b000058",
+      "kind": "blank",
+      "start_line": 166,
+      "end_line": 166,
+      "raw": "\n"
+    },
+    {
+      "id": "b000059",
+      "kind": "heading",
+      "start_line": 167,
+      "end_line": 167,
+      "raw": "## License\n",
+      "level": 2,
+      "title": "License"
+    },
+    {
+      "id": "b000060",
+      "kind": "blank",
+      "start_line": 168,
+      "end_line": 168,
+      "raw": "\n"
+    },
+    {
+      "id": "b000061",
+      "kind": "paragraph",
+      "start_line": 169,
+      "end_line": 169,
+      "raw": "SPDX-License-Identifier: MIT\n"
+    },
+    {
+      "id": "b000062",
+      "kind": "blank",
+      "start_line": 170,
+      "end_line": 170,
+      "raw": "\n"
+    },
+    {
+      "id": "b000063",
+      "kind": "paragraph",
+      "start_line": 171,
+      "end_line": 173,
+      "raw": "The original code and documentation in this repository are licensed under the\n[MIT License](LICENSE). Third-party code, libraries, fonts, tools, and model\nweights retain their respective licenses.\n"
+    },
+    {
+      "id": "b000064",
+      "kind": "blank",
+      "start_line": 174,
+      "end_line": 174,
+      "raw": "\n"
+    },
+    {
+      "id": "b000065",
+      "kind": "heading",
+      "start_line": 175,
+      "end_line": 175,
+      "raw": "## Source header layout\n",
+      "level": 2,
+      "title": "Source header layout"
+    },
+    {
+      "id": "b000066",
+      "kind": "blank",
+      "start_line": 176,
+      "end_line": 176,
+      "raw": "\n"
+    },
+    {
+      "id": "b000067",
+      "kind": "paragraph",
+      "start_line": 177,
+      "end_line": 181,
+      "raw": "Public headers and implementations live together in `src/iiJson/`.\nThere is no separate authored `include/` tree. Existing public `#include` names\nand exported CMake target names remain unchanged; installation still places only public\nheaders in the package include directory. Generated export headers belong to\n`build/`, not to the authored source tree.\n"
+    },
+    {
+      "id": "b000068",
+      "kind": "blank",
+      "start_line": 182,
+      "end_line": 182,
+      "raw": "\n"
+    },
+    {
+      "id": "b000069",
+      "kind": "heading",
+      "start_line": 183,
+      "end_line": 183,
+      "raw": "## Value migration\n",
+      "level": 2,
+      "title": "Value migration"
+    },
+    {
+      "id": "b000070",
+      "kind": "blank",
+      "start_line": 184,
+      "end_line": 184,
+      "raw": "\n"
+    },
+    {
+      "id": "b000071",
+      "kind": "paragraph",
+      "start_line": 185,
+      "end_line": 191,
+      "raw": "`ii::json::Value` is now a distinct type, not an alias of `ii::core::Value`.\n`ValueKind`, `Bytes` and value-access errors now belong to `ii::json`. Callers\nthat shared Core values must migrate and rebuild because this changes source\nand binary compatibility. Applications can explicitly deep-copy between the\ntypes with the independently configured [Core value adapter](example/CoreValue/);\nthis adapter is never included or linked by the base SDK. See\n[the independence contract](docs/sdk-independence.md).\n"
+    },
+    {
+      "id": "b000072",
+      "kind": "blank",
+      "start_line": 192,
+      "end_line": 192,
+      "raw": "\n"
+    },
+    {
+      "id": "b000073",
+      "kind": "paragraph",
+      "start_line": 193,
+      "end_line": 195,
+      "raw": "Validate this layout from the SDK workspace with\n`python3 -B tests/test_source_header_layout.py`. Reconfigure, build, run CTest,\nand verify a staged installed consumer after changing source/header paths.\n"
+    },
+    {
+      "id": "b000074",
+      "kind": "blank",
+      "start_line": 196,
+      "end_line": 196,
+      "raw": "\n"
+    },
+    {
+      "id": "b000075",
+      "kind": "html",
+      "start_line": 197,
+      "end_line": 197,
+      "raw": "<!-- workspace-docs:readme:start -->\n"
+    },
+    {
+      "id": "b000076",
+      "kind": "heading",
+      "start_line": 198,
+      "end_line": 198,
+      "raw": "## Documentation entry points\n",
+      "level": 2,
+      "title": "Documentation entry points"
+    },
+    {
+      "id": "b000077",
+      "kind": "blank",
+      "start_line": 199,
+      "end_line": 199,
+      "raw": "\n"
+    },
+    {
+      "id": "b000078",
+      "kind": "list",
+      "start_line": 200,
+      "end_line": 203,
+      "raw": "- Human overview: this English `README.md`.\n- Agent instructions: [AGENT.md](AGENT.md).\n- Human documentation: [documentation index](docs/README.md).\n- Structured agent documentation: [agent index](docs/agent-index.json).\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "Human overview: this English `README.md`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Agent instructions: [AGENT.md](AGENT.md).",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Human documentation: [documentation index](docs/README.md).",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Structured agent documentation: [agent index](docs/agent-index.json).",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000079",
+      "kind": "html",
+      "start_line": 204,
+      "end_line": 204,
+      "raw": "<!-- workspace-docs:readme:end -->\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiJson",
+      "anchor": "iijson",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000023",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Domain schemas",
+      "anchor": "domain-schemas",
+      "start_line": 65
+    },
+    {
+      "block_id": "b000035",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Ontology contracts",
+      "anchor": "ontology-contracts",
+      "start_line": 107
+    },
+    {
+      "block_id": "b000059",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "License",
+      "anchor": "license",
+      "start_line": 167
+    },
+    {
+      "block_id": "b000065",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Source header layout",
+      "anchor": "source-header-layout",
+      "start_line": 175
+    },
+    {
+      "block_id": "b000069",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Value migration",
+      "anchor": "value-migration",
+      "start_line": 183
+    },
+    {
+      "block_id": "b000076",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Documentation entry points",
+      "anchor": "documentation-entry-points",
+      "start_line": 198
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000009",
+        "line": 16,
+        "text": "settings field, so MSVC builds do not depend on libc++ transitive includes.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000015",
+        "line": 35,
+        "text": "as unsigned. Integer overflow never falls back to double. Decimal/exponent tokens",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 68,
+        "text": "required/optional fields, nested objects and arrays, nullable values, numeric",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000047",
+        "line": 141,
+        "text": "encoding. Do not change Sync's hash input to this writer without format/version",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000071",
+        "line": 187,
+        "text": "that shared Core values must migrate and rebuild because this changes source",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000071",
+        "line": 190,
+        "text": "this adapter is never included or linked by the base SDK. See",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [
+      {
+        "block_id": "b000051",
+        "language": "sh",
+        "code": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_iiSDKCore=ON -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=ON \\\n  -DCMAKE_INSTALL_PREFIX=\"$PWD/build/install\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure\ncmake --install build\n"
+      }
+    ],
+    "links": [
+      {
+        "block_id": "b000003",
+        "label": "Windows build and execution",
+        "target": "docs/WindowsBuildAndRun.md",
+        "kind": "relative",
+        "line": 3
+      },
+      {
+        "block_id": "b000019",
+        "label": "duplicate-key policy",
+        "target": "docs/duplicate-key-policy.md",
+        "kind": "relative",
+        "line": 57
+      },
+      {
+        "block_id": "b000019",
+        "label": "example",
+        "target": "example/legacy-duplicate-policy.cpp",
+        "kind": "relative",
+        "line": 58
+      },
+      {
+        "block_id": "b000029",
+        "label": "domain example",
+        "target": "example/domain-schema.cpp",
+        "kind": "relative",
+        "line": 92
+      },
+      {
+        "block_id": "b000029",
+        "label": "domain schema contract",
+        "target": "docs/domain-schema.md",
+        "kind": "relative",
+        "line": 94
+      },
+      {
+        "block_id": "b000037",
+        "label": "Palantir Ontology",
+        "target": "https://www.palantir.com/docs/foundry/ontology/overview",
+        "kind": "external",
+        "line": 111
+      },
+      {
+        "block_id": "b000043",
+        "label": "creation example",
+        "target": "example/creation-ontology.cpp",
+        "kind": "relative",
+        "line": 129
+      },
+      {
+        "block_id": "b000043",
+        "label": "ontology contract",
+        "target": "docs/ontology.md",
+        "kind": "relative",
+        "line": 132
+      },
+      {
+        "block_id": "b000057",
+        "label": "RFC 8259",
+        "target": "https://www.rfc-editor.org/rfc/rfc8259",
+        "kind": "external",
+        "line": 165
+      },
+      {
+        "block_id": "b000063",
+        "label": "MIT License",
+        "target": "LICENSE",
+        "kind": "relative",
+        "line": 172
+      },
+      {
+        "block_id": "b000071",
+        "label": "Core value adapter",
+        "target": "example/CoreValue/",
+        "kind": "relative",
+        "line": 189
+      },
+      {
+        "block_id": "b000071",
+        "label": "the independence contract",
+        "target": "docs/sdk-independence.md",
+        "kind": "relative",
+        "line": 191
+      },
+      {
+        "block_id": "b000078",
+        "label": "AGENT.md",
+        "target": "AGENT.md",
+        "kind": "relative",
+        "line": 201
+      },
+      {
+        "block_id": "b000078",
+        "label": "documentation index",
+        "target": "docs/README.md",
+        "kind": "relative",
+        "line": 202
+      },
+      {
+        "block_id": "b000078",
+        "label": "agent index",
+        "target": "docs/agent-index.json",
+        "kind": "relative",
+        "line": 203
+      }
+    ],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

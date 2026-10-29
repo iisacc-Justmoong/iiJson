@@ -1,20 +1,16 @@
 # iiJson: Windows 빌드 및 실행
 
-iiSDKCore Contracts 기반 JSON 공개 계약과 네이티브 구현을 제공하는 C++23 SDK이다.
+다른 SDK에 의존하지 않는 JSON 공개 계약과 네이티브 구현을 제공하는 C++23 SDK이다.
 
 검증 기록 갱신: `2026-10-20T02:45:37+09:00`. 변경 전 소스 기준 commit: `8addec66411ce22e3a2cf2888ff12daf3cc281d8`. 아래 결과는 이번 변경을 포함한 작업 트리의 검증이다.
 
 ## 현재 검증 상태
 
-Release 빌드·실행 검사·설치를 완료하였다. 등록 검사 2개 중 2개 통과, 0개 실패, 0개 skip이다.
+아래의 2/2 결과는 2026-10-20 당시 소스의 기록이다. 값 독립화 이후 Windows 재검증 결과는 아니다.
 
 ## 이 프로젝트의 의존성과 실행 범위
 
-선행 workspace SDK는 다음과 같다. 각각의 Windows 지침에 따라 실행 검증과 설치를 완료한 뒤 진행한다.
-
-- [iiSDKCore](../../../SDK/iiSDKCore/docs/WindowsBuildAndRun.md)
-
-- iiSDKCore Contracts와 경계 검사에 사용하는 Python 3.9 이상이 필요하다. Qt는 필요하지 않다.
+선행 workspace SDK는 없다. 경계 검사에 Python 3.9 이상이 필요하며 Qt도 필요하지 않다. Core 값 어댑터를 별도 앱으로 구성할 때에만 iiSDKCore를 추가한다.
 
 프로젝트별 Windows 조건은 다음과 같다.
 
