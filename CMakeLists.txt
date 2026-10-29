@@ -4,14 +4,23 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(CTest)
 find_package(Python3 3.9 REQUIRED COMPONENTS Interpreter)
-add_library(iiJson STATIC src/iiJson/Json.cpp src/iiJson/Value.cpp src/iiJson/Schema.cpp src/iiJson/SchemaDefinition.cpp)
+set(_json_public_headers
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Json.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/Value.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Schema/Schema.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/Ontology/Ontology.h")
+foreach(_header IN LISTS _json_public_headers)
+    get_filename_component(_name "${_header}" NAME)
+    file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/include/iiJson/${_name}"
+        CONTENT "#pragma once\n#include \"${_header}\"\n")
+endforeach()
+add_library(iiJson STATIC src/Json.cpp src/Value.cpp src/Schema/Schema.cpp src/Schema/SchemaDefinition.cpp)
 add_library(iiJson::iiJson ALIAS iiJson)
-add_library(iiJsonOntology STATIC src/iiJson/Ontology.cpp src/iiJson/OntologyCodec.cpp src/iiJson/Snapshot.cpp)
+add_library(iiJsonOntology STATIC src/Ontology/Ontology.cpp src/Ontology/OntologyCodec.cpp src/Ontology/Snapshot.cpp)
 add_library(iiJson::Ontology ALIAS iiJsonOntology)
 set_target_properties(iiJsonOntology PROPERTIES EXPORT_NAME Ontology CXX_EXTENSIONS OFF POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(iiJsonOntology PUBLIC iiJson::iiJson)
 target_compile_features(iiJson PUBLIC cxx_std_23)
-target_include_directories(iiJson PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+target_include_directories(iiJson PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 set_target_properties(iiJson PROPERTIES CXX_EXTENSIONS OFF POSITION_INDEPENDENT_CODE ON)
 add_custom_target(iiJsonBoundary ALL COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/boundary.py" "${CMAKE_CURRENT_SOURCE_DIR}" VERBATIM)
 add_dependencies(iiJson iiJsonBoundary)
@@ -19,6 +28,8 @@ if(MSVC)
     target_compile_options(iiJson PUBLIC /utf-8)
 endif()
 if(BUILD_TESTING)
+    add_test(NAME iiJson.SourceLayout COMMAND "${CMAKE_COMMAND}"
+        "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}" -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/source_layout.cmake")
     add_executable(iiJson_contracts tests/contracts.cpp)
     target_link_libraries(iiJson_contracts PRIVATE iiJson::iiJson)
     add_test(NAME iiJson.Contracts COMMAND iiJson_contracts)
@@ -50,10 +61,10 @@ if(BUILD_TESTING)
 endif()
 install(TARGETS iiJson iiJsonOntology EXPORT iiJsonTargets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(FILES
-    src/iiJson/Json.h
-    src/iiJson/Value.h
-    src/iiJson/Schema.h
-    src/iiJson/Ontology.h
+    src/Json.h
+    src/Value.h
+    src/Schema/Schema.h
+    src/Ontology/Ontology.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiJson)
 install(EXPORT iiJsonTargets NAMESPACE iiJson:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/iiJson)
 configure_package_config_file(cmake/iiJsonConfig.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfig.cmake" INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/iiJson)

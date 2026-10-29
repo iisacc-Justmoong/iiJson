@@ -14,14 +14,14 @@
       "document_id": "urn:iisacc:document:ff6984723c1da4c856c2abffb7abed57975bd04ef70a9c2fabc71c9b77960b85",
       "source": "AGENT.md",
       "agent_json": "docs/entrypoints/AGENT.agent.json",
-      "source_sha256": "464a4eb5c9023f532c51d5ea9cf7f954aa049ab7bf688daadb801feca9bd6581",
+      "source_sha256": "24b1b171158dd97c9656743685c5baa0322ca9eb7504d57b4fd808fcc716afa9",
       "role": "instructions"
     },
     {
       "document_id": "urn:iisacc:document:06d3c05d1617ee52fbcf712682dd44bf99ad32eaf535886eb6dafe09920f1ce9",
       "source": "README.md",
       "agent_json": "docs/entrypoints/README.agent.json",
-      "source_sha256": "7bf61316f1065f49e920b3d8ca16b5894907e0dc8ce8897a9278b0f8fac5d539",
+      "source_sha256": "f25e4eef11a4f92fc186f362c84fea6d8c6a6dc8866d5a5b26e368ed1c751310",
       "role": "overview"
     },
     {
@@ -70,7 +70,7 @@
       "document_id": "urn:iisacc:document:4d76f61c86b17b162f7c40fc4165573cafd5f45f7102060804488dbbe7fec73f",
       "source": "docs/ontology.md",
       "agent_json": "docs/ontology.agent.json",
-      "source_sha256": "44bd10dd1fc38d263e183703e0e3c166605d69331e6aade83f8df0d424e7082a",
+      "source_sha256": "12c80dfe62230cbe948fab5f1bf396911d53cc350d73d860c95274f159732981",
       "role": "guide"
     },
     {

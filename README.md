@@ -174,7 +174,9 @@ weights retain their respective licenses.
 
 ## Source header layout
 
-Public headers and implementations live together in `src/iiJson/`.
+Public headers and implementations live together under `src/`, with schema and
+ontology responsibilities in their own subdirectories. Existing `<iiJson/...>`
+public include names remain unchanged.
 There is no separate authored `include/` tree. Existing public `#include` names
 and exported CMake target names remain unchanged; installation still places only public
 headers in the package include directory. Generated export headers belong to

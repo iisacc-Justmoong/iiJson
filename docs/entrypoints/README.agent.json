@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "README.md",
-    "sha256": "7bf61316f1065f49e920b3d8ca16b5894907e0dc8ce8897a9278b0f8fac5d539",
-    "bytes": 10078,
-    "line_count": 204,
+    "sha256": "f25e4eef11a4f92fc186f362c84fea6d8c6a6dc8866d5a5b26e368ed1c751310",
+    "bytes": 10208,
+    "line_count": 206,
     "encoding": "utf-8",
     "language": "en"
   },
@@ -513,21 +513,21 @@
       "id": "b000067",
       "kind": "paragraph",
       "start_line": 177,
-      "end_line": 181,
-      "raw": "Public headers and implementations live together in `src/iiJson/`.\nThere is no separate authored `include/` tree. Existing public `#include` names\nand exported CMake target names remain unchanged; installation still places only public\nheaders in the package include directory. Generated export headers belong to\n`build/`, not to the authored source tree.\n"
+      "end_line": 183,
+      "raw": "Public headers and implementations live together under `src/`, with schema and\nontology responsibilities in their own subdirectories. Existing `<iiJson/...>`\npublic include names remain unchanged.\nThere is no separate authored `include/` tree. Existing public `#include` names\nand exported CMake target names remain unchanged; installation still places only public\nheaders in the package include directory. Generated export headers belong to\n`build/`, not to the authored source tree.\n"
     },
     {
       "id": "b000068",
       "kind": "blank",
-      "start_line": 182,
-      "end_line": 182,
+      "start_line": 184,
+      "end_line": 184,
       "raw": "\n"
     },
     {
       "id": "b000069",
       "kind": "heading",
-      "start_line": 183,
-      "end_line": 183,
+      "start_line": 185,
+      "end_line": 185,
       "raw": "## Value migration\n",
       "level": 2,
       "title": "Value migration"
@@ -535,50 +535,50 @@
     {
       "id": "b000070",
       "kind": "blank",
-      "start_line": 184,
-      "end_line": 184,
+      "start_line": 186,
+      "end_line": 186,
       "raw": "\n"
     },
     {
       "id": "b000071",
       "kind": "paragraph",
-      "start_line": 185,
-      "end_line": 191,
+      "start_line": 187,
+      "end_line": 193,
       "raw": "`ii::json::Value` is now a distinct type, not an alias of `ii::core::Value`.\n`ValueKind`, `Bytes` and value-access errors now belong to `ii::json`. Callers\nthat shared Core values must migrate and rebuild because this changes source\nand binary compatibility. Applications can explicitly deep-copy between the\ntypes with the independently configured [Core value adapter](example/CoreValue/);\nthis adapter is never included or linked by the base SDK. See\n[the independence contract](docs/sdk-independence.md).\n"
     },
     {
       "id": "b000072",
       "kind": "blank",
-      "start_line": 192,
-      "end_line": 192,
+      "start_line": 194,
+      "end_line": 194,
       "raw": "\n"
     },
     {
       "id": "b000073",
       "kind": "paragraph",
-      "start_line": 193,
-      "end_line": 195,
+      "start_line": 195,
+      "end_line": 197,
       "raw": "Validate this layout from the SDK workspace with\n`python3 -B tests/test_source_header_layout.py`. Reconfigure, build, run CTest,\nand verify a staged installed consumer after changing source/header paths.\n"
     },
     {
       "id": "b000074",
       "kind": "blank",
-      "start_line": 196,
-      "end_line": 196,
+      "start_line": 198,
+      "end_line": 198,
       "raw": "\n"
     },
     {
       "id": "b000075",
       "kind": "html",
-      "start_line": 197,
-      "end_line": 197,
+      "start_line": 199,
+      "end_line": 199,
       "raw": "<!-- workspace-docs:readme:start -->\n"
     },
     {
       "id": "b000076",
       "kind": "heading",
-      "start_line": 198,
-      "end_line": 198,
+      "start_line": 200,
+      "end_line": 200,
       "raw": "## Documentation entry points\n",
       "level": 2,
       "title": "Documentation entry points"
@@ -586,15 +586,15 @@
     {
       "id": "b000077",
       "kind": "blank",
-      "start_line": 199,
-      "end_line": 199,
+      "start_line": 201,
+      "end_line": 201,
       "raw": "\n"
     },
     {
       "id": "b000078",
       "kind": "list",
-      "start_line": 200,
-      "end_line": 203,
+      "start_line": 202,
+      "end_line": 205,
       "raw": "- Human overview: this English `README.md`.\n- Agent instructions: [AGENT.md](AGENT.md).\n- Human documentation: [documentation index](docs/README.md).\n- Structured agent documentation: [agent index](docs/agent-index.json).\n",
       "items": [
         {
@@ -622,8 +622,8 @@
     {
       "id": "b000079",
       "kind": "html",
-      "start_line": 204,
-      "end_line": 204,
+      "start_line": 206,
+      "end_line": 206,
       "raw": "<!-- workspace-docs:readme:end -->\n"
     }
   ],
@@ -674,7 +674,7 @@
       "level": 2,
       "title": "Value migration",
       "anchor": "value-migration",
-      "start_line": 183
+      "start_line": 185
     },
     {
       "block_id": "b000076",
@@ -682,7 +682,7 @@
       "level": 2,
       "title": "Documentation entry points",
       "anchor": "documentation-entry-points",
-      "start_line": 198
+      "start_line": 200
     }
   ],
   "indexes": {
@@ -717,14 +717,14 @@
       },
       {
         "block_id": "b000071",
-        "line": 187,
+        "line": 189,
         "text": "that shared Core values must migrate and rebuild because this changes source",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
         "block_id": "b000071",
-        "line": 190,
+        "line": 192,
         "text": "this adapter is never included or linked by the base SDK. See",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -813,35 +813,35 @@
         "label": "Core value adapter",
         "target": "example/CoreValue/",
         "kind": "relative",
-        "line": 189
+        "line": 191
       },
       {
         "block_id": "b000071",
         "label": "the independence contract",
         "target": "docs/sdk-independence.md",
         "kind": "relative",
-        "line": 191
+        "line": 193
       },
       {
         "block_id": "b000078",
         "label": "AGENT.md",
         "target": "AGENT.md",
         "kind": "relative",
-        "line": 201
+        "line": 203
       },
       {
         "block_id": "b000078",
         "label": "documentation index",
         "target": "docs/README.md",
         "kind": "relative",
-        "line": 202
+        "line": 204
       },
       {
         "block_id": "b000078",
         "label": "agent index",
         "target": "docs/agent-index.json",
         "kind": "relative",
-        "line": 203
+        "line": 205
       }
     ],
     "tables": []

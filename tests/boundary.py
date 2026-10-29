@@ -12,8 +12,8 @@ for folder in ('src',):
 for path in (root/'CMakeLists.txt',root/'cmake/iiJsonConfig.cmake.in'):
     dependencies=re.findall(r'find_(?:package|dependency)\(\s*(\w+)',path.read_text())
     assert set(dependencies)<= {'Python3'}, f'peer package dependency: {path}'
-for name in ('Json.h','Json.cpp','Schema.h','Schema.cpp','SchemaDefinition.cpp','detail/SchemaNode.h','detail/ContractIO.h'):
-    path=root/'src/iiJson'/name
+for name in ('Json.h','Json.cpp','Schema/Schema.h','Schema/Schema.cpp','Schema/SchemaDefinition.cpp','detail/SchemaNode.h','detail/ContractIO.h'):
+    path=root/'src'/name
     includes=re.findall(r'#\s*include\s*[<"]([^>"]+)',path.read_text())
     assert not any('Ontology' in item for item in includes), f'base-to-ontology dependency: {path}'
 print('iiJson boundary passed: standard C++ only; ontology depends on the codec')
