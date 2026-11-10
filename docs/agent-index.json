@@ -25,17 +25,24 @@
       "role": "overview"
     },
     {
+      "document_id": "urn:iisacc:document:bff188a2d70ee84556ac63ca9c79bbb1c234bda73f8b9d23fb994ad6699aaab6",
+      "source": "docs/DynamicLinking.md",
+      "agent_json": "docs/DynamicLinking.agent.json",
+      "source_sha256": "d32a87da0692823fd60e8cc67c133f9d8d6d5accc0278ea8628811df8737c049",
+      "role": "guide"
+    },
+    {
       "document_id": "urn:iisacc:document:d2befb2e8c309302e84f2825edb8ba37731cb149d82881d55cf4589fb049cc2e",
       "source": "docs/README.md",
       "agent_json": "docs/README.agent.json",
-      "source_sha256": "1768eeba59a1e7aaf90a947919adec751bf032aaf6ee1add899530e53bb2ae0a",
+      "source_sha256": "a4fc02858c290e21f455d788e0bd6f87f3da68801d384dbd2c52d47f69310f98",
       "role": "overview"
     },
     {
       "document_id": "urn:iisacc:document:97216107b06716e21b18d7b06a454f19686f9fb2f7b80b6c1aa65244bc599a5d",
       "source": "docs/WindowsBuildAndRun.md",
       "agent_json": "docs/WindowsBuildAndRun.agent.json",
-      "source_sha256": "38344704c0b24cda2788d21588d00a47b75d6486b7ef9f773406f36cdeea792a",
+      "source_sha256": "9a4cb09fdcbd8f6314f8d022e641657e562ea2883103dcf0aa1a04414c28e53c",
       "role": "guide"
     },
     {
@@ -56,7 +63,7 @@
       "document_id": "urn:iisacc:document:994abf7f4e1fa16ba794de1cd886f52eefa3554554d9d7e7884409e6a4ac4af3",
       "source": "docs/duplicate-key-policy.md",
       "agent_json": "docs/duplicate-key-policy.agent.json",
-      "source_sha256": "ae31563e973d55a29682a486a94376ee5969f5aa95c81fe7a3743f464fc58133",
+      "source_sha256": "ace5e159585503d0e133f4ffb4f9490277654d3cfec7b91513816662faca42ff",
       "role": "guide"
     },
     {

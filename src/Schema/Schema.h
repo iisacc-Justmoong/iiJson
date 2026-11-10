@@ -21,7 +21,7 @@ enum class Presence { required, optional };
 enum class AdditionalFields { reject, allow };
 struct SizeBounds final {
     std::size_t minimum = 0;
-    std::size_t maximum = std::numeric_limits<std::size_t>::max();
+    std::size_t maximum = (std::numeric_limits<std::size_t>::max)();
 };
 struct Field;
 
@@ -35,11 +35,11 @@ public:
     [[nodiscard]] static Schema null();
     [[nodiscard]] static Schema boolean();
     [[nodiscard]] static Schema integer(
-        std::int64_t minimum = std::numeric_limits<std::int64_t>::min(),
-        std::int64_t maximum = std::numeric_limits<std::int64_t>::max());
+        std::int64_t minimum = (std::numeric_limits<std::int64_t>::min)(),
+        std::int64_t maximum = (std::numeric_limits<std::int64_t>::max)());
     [[nodiscard]] static Schema unsigned_integer(
         std::uint64_t minimum = 0,
-        std::uint64_t maximum = std::numeric_limits<std::uint64_t>::max());
+        std::uint64_t maximum = (std::numeric_limits<std::uint64_t>::max)());
     [[nodiscard]] static Schema number(std::optional<double> minimum = {},
                                        std::optional<double> maximum = {});
     // Strings count Unicode scalar values; arrays count elements. Bounds include

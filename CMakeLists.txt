@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.31)
 project(iiJson VERSION 0.1.2 LANGUAGES CXX)
+option(BUILD_SHARED_LIBS "Build iiJson shared libraries" ON)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 include(CTest)
@@ -12,9 +13,9 @@ foreach(_header IN LISTS _json_public_headers)
     file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/include/iiJson/${_name}"
         CONTENT "#pragma once\n#include \"${_header}\"\n")
 endforeach()
-add_library(iiJson STATIC src/Json.cpp src/Value.cpp src/Schema/Schema.cpp src/Schema/SchemaDefinition.cpp)
+add_library(iiJson src/Json.cpp src/Value.cpp src/Schema/Schema.cpp src/Schema/SchemaDefinition.cpp)
 add_library(iiJson::iiJson ALIAS iiJson)
-add_library(iiJsonOntology STATIC src/Ontology/Ontology.cpp src/Ontology/OntologyCodec.cpp src/Ontology/Snapshot.cpp)
+add_library(iiJsonOntology src/Ontology/Ontology.cpp src/Ontology/OntologyCodec.cpp src/Ontology/Snapshot.cpp)
 add_library(iiJson::Ontology ALIAS iiJsonOntology)
 set_target_properties(iiJsonOntology PROPERTIES EXPORT_NAME Ontology CXX_EXTENSIONS OFF POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(iiJsonOntology PUBLIC iiJson::iiJson)
@@ -27,7 +28,32 @@ add_dependencies(iiJson iiJsonBoundary)
 if(MSVC)
     target_compile_options(iiJson PUBLIC /utf-8)
 endif()
+if(BUILD_SHARED_LIBS)
+    set_target_properties(iiJson PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    if(CMAKE_SYSTEM_NAME STREQUAL "iOS")
+        set_target_properties(iiJson PROPERTIES FRAMEWORK TRUE FRAMEWORK_VERSION A
+            MACOSX_FRAMEWORK_IDENTIFIER "com.iisacc.iiJson")
+    elseif(APPLE)
+        set_property(TARGET iiJson APPEND PROPERTY INSTALL_RPATH "@loader_path")
+    elseif(UNIX AND NOT EMSCRIPTEN)
+        set_property(TARGET iiJson APPEND PROPERTY INSTALL_RPATH "$ORIGIN")
+    endif()
+    set_target_properties(iiJsonOntology PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+    if(CMAKE_SYSTEM_NAME STREQUAL "iOS")
+        set_target_properties(iiJsonOntology PROPERTIES FRAMEWORK TRUE FRAMEWORK_VERSION A
+            MACOSX_FRAMEWORK_IDENTIFIER "com.iisacc.iiJsonOntology")
+    elseif(APPLE)
+        set_property(TARGET iiJsonOntology APPEND PROPERTY INSTALL_RPATH "@loader_path")
+    elseif(UNIX AND NOT EMSCRIPTEN)
+        set_property(TARGET iiJsonOntology APPEND PROPERTY INSTALL_RPATH "$ORIGIN")
+    endif()
+endif()
+
 if(BUILD_TESTING)
+    if(WIN32)
+        add_library(iiJsonWindowsHeaderMacros OBJECT tests/windows_header_macros.cpp)
+        target_link_libraries(iiJsonWindowsHeaderMacros PRIVATE iiJson::iiJson)
+    endif()
     add_test(NAME iiJson.SourceLayout COMMAND "${CMAKE_COMMAND}"
         "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}" -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/source_layout.cmake")
     add_executable(iiJson_contracts tests/contracts.cpp)
@@ -59,7 +85,9 @@ if(BUILD_TESTING)
     add_test(NAME iiJson.OntologyExample COMMAND iiJson_ontology_example)
     add_test(NAME iiJson.Boundary COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/boundary.py" "${CMAKE_CURRENT_SOURCE_DIR}")
 endif()
-install(TARGETS iiJson iiJsonOntology EXPORT iiJsonTargets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS iiJson iiJsonOntology EXPORT iiJsonTargets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    FRAMEWORK DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(FILES
     src/Json.h
     src/Value.h
@@ -76,3 +104,9 @@ install(DIRECTORY docs/ DESTINATION ${CMAKE_INSTALL_DATADIR}/iiJson/docs
     PATTERN "*.iisacc-preview" EXCLUDE PATTERN ".iisacc-temporary.lock" EXCLUDE PATTERN ".DS_Store" EXCLUDE)
 install(DIRECTORY example/ DESTINATION ${CMAKE_INSTALL_DATADIR}/iiJson/example
     PATTERN "*.iisacc-preview" EXCLUDE PATTERN ".iisacc-temporary.lock" EXCLUDE PATTERN ".DS_Store" EXCLUDE)
+
+if(BUILD_TESTING AND BUILD_SHARED_LIBS AND NOT CMAKE_CROSSCOMPILING)
+    add_test(NAME iiJson.shared_link COMMAND "${CMAKE_COMMAND}"
+        "-DIMAGE=$<TARGET_FILE:iiJson_ontology>" "-DEXPECTED=$<TARGET_FILE:iiJsonOntology>"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/shared_link.cmake")
+endif()

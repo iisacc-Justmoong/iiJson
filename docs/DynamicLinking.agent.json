@@ -1,0 +1,128 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:bff188a2d70ee84556ac63ca9c79bbb1c234bda73f8b9d23fb994ad6699aaab6",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiJson",
+    "name": "iiJson",
+    "root": "SDK/iiJson",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/DynamicLinking.md",
+    "sha256": "d32a87da0692823fd60e8cc67c133f9d8d6d5accc0278ea8628811df8737c049",
+    "bytes": 981,
+    "line_count": 13,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "동적 라이브러리 빌드",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 동적 라이브러리 빌드\n",
+      "level": 1,
+      "title": "동적 라이브러리 빌드"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 7,
+      "raw": "`iiJson`은 기본적으로 공유 라이브러리로 빌드한다. 정적 산출물이 필요한\n소비자는 `BUILD_SHARED_LIBS=OFF`를 명시할 수 있다. 공유 라이브러리의 공개\nCMake 타깃과 헤더 경로는 유지하며, Windows에서는 공개 심볼을 DLL에서\n내보내고 iOS에서는 프레임워크로 설치한다. 애플리케이션은 실제 사용하는\n공유 라이브러리와 필요한 런타임 의존성을 자체 패키지에 내장해야 한다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 11,
+      "raw": "테스트는 라이브러리 소비 실행 파일의 연결 정보를 검사하며 이 검사를 위해\n앱을 실행하지 않는다. 다른 운영체제와 실제 기기의 동작은 해당 환경에서 별도\n검증해야 한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "Emscripten 소비자 설정은 공유 사이드 모듈을 가져오기 전에 CMake의 공유 라이브러리 지원을 활성화한다. 앱의 메인 모듈 컴파일·링크 옵션은 빌더 또는 앱이 지정해야 한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "동적 라이브러리 빌드",
+      "anchor": "동적-라이브러리-빌드",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 7,
+        "text": "공유 라이브러리와 필요한 런타임 의존성을 자체 패키지에 내장해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000005",
+        "line": 10,
+        "text": "앱을 실행하지 않는다. 다른 운영체제와 실제 기기의 동작은 해당 환경에서 별도",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000005",
+        "line": 11,
+        "text": "검증해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000007",
+        "line": 13,
+        "text": "Emscripten 소비자 설정은 공유 사이드 모듈을 가져오기 전에 CMake의 공유 라이브러리 지원을 활성화한다. 앱의 메인 모듈 컴파일·링크 옵션은 빌더 또는 앱이 지정해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}
