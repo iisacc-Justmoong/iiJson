@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/README.md",
-    "sha256": "a4fc02858c290e21f455d788e0bd6f87f3da68801d384dbd2c52d47f69310f98",
-    "bytes": 1151,
-    "line_count": 20,
+    "sha256": "f4dcbfaa77eb48c46af6161f8259b66b26e3bc3a8e13eacdba9e8f9ded1d8d57",
+    "bytes": 1216,
+    "line_count": 21,
     "encoding": "utf-8",
     "language": "en"
   },
@@ -79,8 +79,8 @@
       "id": "b000008",
       "kind": "table",
       "start_line": 8,
-      "end_line": 19,
-      "raw": "| Document | Agent JSON |\n| --- | --- |\n| [`AGENT.md`](../AGENT.md) | [JSON](entrypoints/AGENT.agent.json) |\n| [`README.md`](../README.md) | [JSON](entrypoints/README.agent.json) |\n| [`docs/DynamicLinking.md`](DynamicLinking.md) | [JSON](DynamicLinking.agent.json) |\n| [`docs/WindowsBuildAndRun.md`](WindowsBuildAndRun.md) | [JSON](WindowsBuildAndRun.agent.json) |\n| [`docs/documentation-structure.md`](documentation-structure.md) | [JSON](documentation-structure.agent.json) |\n| [`docs/domain-schema.md`](domain-schema.md) | [JSON](domain-schema.agent.json) |\n| [`docs/duplicate-key-policy.md`](duplicate-key-policy.md) | [JSON](duplicate-key-policy.agent.json) |\n| [`docs/native-numbers.md`](native-numbers.md) | [JSON](native-numbers.agent.json) |\n| [`docs/ontology.md`](ontology.md) | [JSON](ontology.agent.json) |\n| [`docs/sdk-independence.md`](sdk-independence.md) | [JSON](sdk-independence.agent.json) |\n",
+      "end_line": 20,
+      "raw": "| Document | Agent JSON |\n| --- | --- |\n| [`AGENT.md`](../AGENT.md) | [JSON](entrypoints/AGENT.agent.json) |\n| [`README.md`](../README.md) | [JSON](entrypoints/README.agent.json) |\n| [`docs/DynamicLinking.md`](DynamicLinking.md) | [JSON](DynamicLinking.agent.json) |\n| [`docs/License.md`](License.md) | [JSON](License.agent.json) |\n| [`docs/WindowsBuildAndRun.md`](WindowsBuildAndRun.md) | [JSON](WindowsBuildAndRun.agent.json) |\n| [`docs/documentation-structure.md`](documentation-structure.md) | [JSON](documentation-structure.agent.json) |\n| [`docs/domain-schema.md`](domain-schema.md) | [JSON](domain-schema.agent.json) |\n| [`docs/duplicate-key-policy.md`](duplicate-key-policy.md) | [JSON](duplicate-key-policy.agent.json) |\n| [`docs/native-numbers.md`](native-numbers.md) | [JSON](native-numbers.agent.json) |\n| [`docs/ontology.md`](ontology.md) | [JSON](ontology.agent.json) |\n| [`docs/sdk-independence.md`](sdk-independence.md) | [JSON](sdk-independence.agent.json) |\n",
       "columns": [
         "Document",
         "Agent JSON"
@@ -97,6 +97,10 @@
         [
           "[`docs/DynamicLinking.md`](DynamicLinking.md)",
           "[JSON](DynamicLinking.agent.json)"
+        ],
+        [
+          "[`docs/License.md`](License.md)",
+          "[JSON](License.agent.json)"
         ],
         [
           "[`docs/WindowsBuildAndRun.md`](WindowsBuildAndRun.md)",
@@ -131,8 +135,8 @@
     {
       "id": "b000009",
       "kind": "html",
-      "start_line": 20,
-      "end_line": 20,
+      "start_line": 21,
+      "end_line": 21,
       "raw": "<!-- workspace-docs:document-map:end -->\n"
     }
   ],
@@ -202,101 +206,115 @@
       },
       {
         "block_id": "b000008",
+        "label": "`docs/License.md`",
+        "target": "License.md",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "License.agent.json",
+        "kind": "relative",
+        "line": 13
+      },
+      {
+        "block_id": "b000008",
         "label": "`docs/WindowsBuildAndRun.md`",
         "target": "WindowsBuildAndRun.md",
         "kind": "relative",
-        "line": 13
+        "line": 14
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "WindowsBuildAndRun.agent.json",
         "kind": "relative",
-        "line": 13
+        "line": 14
       },
       {
         "block_id": "b000008",
         "label": "`docs/documentation-structure.md`",
         "target": "documentation-structure.md",
         "kind": "relative",
-        "line": 14
+        "line": 15
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "documentation-structure.agent.json",
         "kind": "relative",
-        "line": 14
+        "line": 15
       },
       {
         "block_id": "b000008",
         "label": "`docs/domain-schema.md`",
         "target": "domain-schema.md",
         "kind": "relative",
-        "line": 15
+        "line": 16
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "domain-schema.agent.json",
         "kind": "relative",
-        "line": 15
+        "line": 16
       },
       {
         "block_id": "b000008",
         "label": "`docs/duplicate-key-policy.md`",
         "target": "duplicate-key-policy.md",
         "kind": "relative",
-        "line": 16
+        "line": 17
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "duplicate-key-policy.agent.json",
         "kind": "relative",
-        "line": 16
+        "line": 17
       },
       {
         "block_id": "b000008",
         "label": "`docs/native-numbers.md`",
         "target": "native-numbers.md",
         "kind": "relative",
-        "line": 17
+        "line": 18
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "native-numbers.agent.json",
         "kind": "relative",
-        "line": 17
+        "line": 18
       },
       {
         "block_id": "b000008",
         "label": "`docs/ontology.md`",
         "target": "ontology.md",
         "kind": "relative",
-        "line": 18
+        "line": 19
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "ontology.agent.json",
         "kind": "relative",
-        "line": 18
+        "line": 19
       },
       {
         "block_id": "b000008",
         "label": "`docs/sdk-independence.md`",
         "target": "sdk-independence.md",
         "kind": "relative",
-        "line": 19
+        "line": 20
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "sdk-independence.agent.json",
         "kind": "relative",
-        "line": 19
+        "line": 20
       }
     ],
     "tables": [
@@ -318,6 +336,10 @@
           [
             "[`docs/DynamicLinking.md`](DynamicLinking.md)",
             "[JSON](DynamicLinking.agent.json)"
+          ],
+          [
+            "[`docs/License.md`](License.md)",
+            "[JSON](License.agent.json)"
           ],
           [
             "[`docs/WindowsBuildAndRun.md`](WindowsBuildAndRun.md)",

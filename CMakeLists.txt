@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.31)
 project(iiJson VERSION 0.1.2 LANGUAGES CXX)
+set(iiJson_SPDX_LICENSE "Apache-2.0")
 option(BUILD_SHARED_LIBS "Build iiJson shared libraries" ON)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
@@ -56,6 +57,10 @@ if(BUILD_TESTING)
     endif()
     add_test(NAME iiJson.SourceLayout COMMAND "${CMAKE_COMMAND}"
         "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}" -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/source_layout.cmake")
+    add_test(NAME iiJson.License COMMAND "${CMAKE_COMMAND}"
+        "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
+        "-DPACKAGE_CONFIG=${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfig.cmake"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/license.cmake")
     add_executable(iiJson_contracts tests/contracts.cpp)
     target_link_libraries(iiJson_contracts PRIVATE iiJson::iiJson)
     add_test(NAME iiJson.Contracts COMMAND iiJson_contracts)
@@ -98,7 +103,7 @@ install(EXPORT iiJsonTargets NAMESPACE iiJson:: DESTINATION ${CMAKE_INSTALL_LIBD
 configure_package_config_file(cmake/iiJsonConfig.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfig.cmake" INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/iiJson)
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfigVersion.cmake" VERSION ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfig.cmake" "${CMAKE_CURRENT_BINARY_DIR}/iiJsonConfigVersion.cmake" DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/iiJson)
-install(FILES README.md LICENSE DESTINATION ${CMAKE_INSTALL_DATADIR}/iiJson)
+install(FILES README.md LICENSE NOTICE DESTINATION ${CMAKE_INSTALL_DATADIR}/iiJson)
 
 install(DIRECTORY docs/ DESTINATION ${CMAKE_INSTALL_DATADIR}/iiJson/docs
     PATTERN "*.iisacc-preview" EXCLUDE PATTERN ".iisacc-temporary.lock" EXCLUDE PATTERN ".DS_Store" EXCLUDE)

@@ -161,16 +161,24 @@ The independent consumer in `tests/consumer` disables Qt, Threads and provider
 and Core discovery and checks that no Core target was imported. Native and WASM
 build/execution evidence are recorded by the integration validation, separately.
 
-Original code is MIT; see `LICENSE`. Grammar reference:
+Original code is Apache-2.0; see `LICENSE`. Grammar reference:
 [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259).
 
 ## License
 
-SPDX-License-Identifier: MIT
+SPDX-License-Identifier: Apache-2.0
 
-The original code and documentation in this repository are licensed under the
-[MIT License](LICENSE). Third-party code, libraries, fonts, tools, and model
-weights retain their respective licenses.
+iiJson is licensed under the
+[Apache License, Version 2.0](LICENSE) (SPDX `Apache-2.0`).
+The copyright notice is `Copyright (c) 2026 iisacc`. Attribution for this
+distribution is in [NOTICE](NOTICE). The Korean statement of the same policy
+is [docs/License.md](docs/License.md).
+
+iisacc products under Product are licensed under the GNU Affero General
+Public License (AGPL).
+
+Third-party and vendored code, libraries, fonts, tools, and model weights
+keep their original licenses.
 
 ## Source header layout
 
