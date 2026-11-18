@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "README.md",
-    "sha256": "f25e4eef11a4f92fc186f362c84fea6d8c6a6dc8866d5a5b26e368ed1c751310",
-    "bytes": 10208,
-    "line_count": 206,
+    "sha256": "47ef510894006d4d19250c6020f0196e01c516e6c2b336308ef787979a929185",
+    "bytes": 10505,
+    "line_count": 214,
     "encoding": "utf-8",
     "language": "en"
   },
@@ -440,7 +440,7 @@
       "kind": "paragraph",
       "start_line": 164,
       "end_line": 165,
-      "raw": "Original code is MIT; see `LICENSE`. Grammar reference:\n[RFC 8259](https://www.rfc-editor.org/rfc/rfc8259).\n"
+      "raw": "Original code is Apache-2.0; see `LICENSE`. Grammar reference:\n[RFC 8259](https://www.rfc-editor.org/rfc/rfc8259).\n"
     },
     {
       "id": "b000058",
@@ -470,7 +470,7 @@
       "kind": "paragraph",
       "start_line": 169,
       "end_line": 169,
-      "raw": "SPDX-License-Identifier: MIT\n"
+      "raw": "SPDX-License-Identifier: Apache-2.0\n"
     },
     {
       "id": "b000062",
@@ -483,118 +483,146 @@
       "id": "b000063",
       "kind": "paragraph",
       "start_line": 171,
-      "end_line": 173,
-      "raw": "The original code and documentation in this repository are licensed under the\n[MIT License](LICENSE). Third-party code, libraries, fonts, tools, and model\nweights retain their respective licenses.\n"
+      "end_line": 175,
+      "raw": "iiJson is licensed under the\n[Apache License, Version 2.0](LICENSE) (SPDX `Apache-2.0`).\nThe copyright notice is `Copyright (c) 2026 iisacc`. Attribution for this\ndistribution is in [NOTICE](NOTICE). The Korean statement of the same policy\nis [docs/License.md](docs/License.md).\n"
     },
     {
       "id": "b000064",
-      "kind": "blank",
-      "start_line": 174,
-      "end_line": 174,
-      "raw": "\n"
-    },
-    {
-      "id": "b000065",
-      "kind": "heading",
-      "start_line": 175,
-      "end_line": 175,
-      "raw": "## Source header layout\n",
-      "level": 2,
-      "title": "Source header layout"
-    },
-    {
-      "id": "b000066",
       "kind": "blank",
       "start_line": 176,
       "end_line": 176,
       "raw": "\n"
     },
     {
-      "id": "b000067",
+      "id": "b000065",
       "kind": "paragraph",
       "start_line": 177,
-      "end_line": 183,
-      "raw": "Public headers and implementations live together under `src/`, with schema and\nontology responsibilities in their own subdirectories. Existing `<iiJson/...>`\npublic include names remain unchanged.\nThere is no separate authored `include/` tree. Existing public `#include` names\nand exported CMake target names remain unchanged; installation still places only public\nheaders in the package include directory. Generated export headers belong to\n`build/`, not to the authored source tree.\n"
+      "end_line": 178,
+      "raw": "iisacc products under Product are licensed under the GNU Affero General\nPublic License (AGPL).\n"
+    },
+    {
+      "id": "b000066",
+      "kind": "blank",
+      "start_line": 179,
+      "end_line": 179,
+      "raw": "\n"
+    },
+    {
+      "id": "b000067",
+      "kind": "paragraph",
+      "start_line": 180,
+      "end_line": 181,
+      "raw": "Third-party and vendored code, libraries, fonts, tools, and model weights\nkeep their original licenses.\n"
     },
     {
       "id": "b000068",
+      "kind": "blank",
+      "start_line": 182,
+      "end_line": 182,
+      "raw": "\n"
+    },
+    {
+      "id": "b000069",
+      "kind": "heading",
+      "start_line": 183,
+      "end_line": 183,
+      "raw": "## Source header layout\n",
+      "level": 2,
+      "title": "Source header layout"
+    },
+    {
+      "id": "b000070",
       "kind": "blank",
       "start_line": 184,
       "end_line": 184,
       "raw": "\n"
     },
     {
-      "id": "b000069",
-      "kind": "heading",
+      "id": "b000071",
+      "kind": "paragraph",
       "start_line": 185,
-      "end_line": 185,
+      "end_line": 191,
+      "raw": "Public headers and implementations live together under `src/`, with schema and\nontology responsibilities in their own subdirectories. Existing `<iiJson/...>`\npublic include names remain unchanged.\nThere is no separate authored `include/` tree. Existing public `#include` names\nand exported CMake target names remain unchanged; installation still places only public\nheaders in the package include directory. Generated export headers belong to\n`build/`, not to the authored source tree.\n"
+    },
+    {
+      "id": "b000072",
+      "kind": "blank",
+      "start_line": 192,
+      "end_line": 192,
+      "raw": "\n"
+    },
+    {
+      "id": "b000073",
+      "kind": "heading",
+      "start_line": 193,
+      "end_line": 193,
       "raw": "## Value migration\n",
       "level": 2,
       "title": "Value migration"
     },
     {
-      "id": "b000070",
-      "kind": "blank",
-      "start_line": 186,
-      "end_line": 186,
-      "raw": "\n"
-    },
-    {
-      "id": "b000071",
-      "kind": "paragraph",
-      "start_line": 187,
-      "end_line": 193,
-      "raw": "`ii::json::Value` is now a distinct type, not an alias of `ii::core::Value`.\n`ValueKind`, `Bytes` and value-access errors now belong to `ii::json`. Callers\nthat shared Core values must migrate and rebuild because this changes source\nand binary compatibility. Applications can explicitly deep-copy between the\ntypes with the independently configured [Core value adapter](example/CoreValue/);\nthis adapter is never included or linked by the base SDK. See\n[the independence contract](docs/sdk-independence.md).\n"
-    },
-    {
-      "id": "b000072",
+      "id": "b000074",
       "kind": "blank",
       "start_line": 194,
       "end_line": 194,
       "raw": "\n"
     },
     {
-      "id": "b000073",
+      "id": "b000075",
       "kind": "paragraph",
       "start_line": 195,
-      "end_line": 197,
-      "raw": "Validate this layout from the SDK workspace with\n`python3 -B tests/test_source_header_layout.py`. Reconfigure, build, run CTest,\nand verify a staged installed consumer after changing source/header paths.\n"
-    },
-    {
-      "id": "b000074",
-      "kind": "blank",
-      "start_line": 198,
-      "end_line": 198,
-      "raw": "\n"
-    },
-    {
-      "id": "b000075",
-      "kind": "html",
-      "start_line": 199,
-      "end_line": 199,
-      "raw": "<!-- workspace-docs:readme:start -->\n"
+      "end_line": 201,
+      "raw": "`ii::json::Value` is now a distinct type, not an alias of `ii::core::Value`.\n`ValueKind`, `Bytes` and value-access errors now belong to `ii::json`. Callers\nthat shared Core values must migrate and rebuild because this changes source\nand binary compatibility. Applications can explicitly deep-copy between the\ntypes with the independently configured [Core value adapter](example/CoreValue/);\nthis adapter is never included or linked by the base SDK. See\n[the independence contract](docs/sdk-independence.md).\n"
     },
     {
       "id": "b000076",
+      "kind": "blank",
+      "start_line": 202,
+      "end_line": 202,
+      "raw": "\n"
+    },
+    {
+      "id": "b000077",
+      "kind": "paragraph",
+      "start_line": 203,
+      "end_line": 205,
+      "raw": "Validate this layout from the SDK workspace with\n`python3 -B tests/test_source_header_layout.py`. Reconfigure, build, run CTest,\nand verify a staged installed consumer after changing source/header paths.\n"
+    },
+    {
+      "id": "b000078",
+      "kind": "blank",
+      "start_line": 206,
+      "end_line": 206,
+      "raw": "\n"
+    },
+    {
+      "id": "b000079",
+      "kind": "html",
+      "start_line": 207,
+      "end_line": 207,
+      "raw": "<!-- workspace-docs:readme:start -->\n"
+    },
+    {
+      "id": "b000080",
       "kind": "heading",
-      "start_line": 200,
-      "end_line": 200,
+      "start_line": 208,
+      "end_line": 208,
       "raw": "## Documentation entry points\n",
       "level": 2,
       "title": "Documentation entry points"
     },
     {
-      "id": "b000077",
+      "id": "b000081",
       "kind": "blank",
-      "start_line": 201,
-      "end_line": 201,
+      "start_line": 209,
+      "end_line": 209,
       "raw": "\n"
     },
     {
-      "id": "b000078",
+      "id": "b000082",
       "kind": "list",
-      "start_line": 202,
-      "end_line": 205,
+      "start_line": 210,
+      "end_line": 213,
       "raw": "- Human overview: this English `README.md`.\n- Agent instructions: [AGENT.md](AGENT.md).\n- Human documentation: [documentation index](docs/README.md).\n- Structured agent documentation: [agent index](docs/agent-index.json).\n",
       "items": [
         {
@@ -620,10 +648,10 @@
       ]
     },
     {
-      "id": "b000079",
+      "id": "b000083",
       "kind": "html",
-      "start_line": 206,
-      "end_line": 206,
+      "start_line": 214,
+      "end_line": 214,
       "raw": "<!-- workspace-docs:readme:end -->\n"
     }
   ],
@@ -661,28 +689,28 @@
       "start_line": 167
     },
     {
-      "block_id": "b000065",
+      "block_id": "b000069",
       "parent_id": "b000001",
       "level": 2,
       "title": "Source header layout",
       "anchor": "source-header-layout",
-      "start_line": 175
+      "start_line": 183
     },
     {
-      "block_id": "b000069",
+      "block_id": "b000073",
       "parent_id": "b000001",
       "level": 2,
       "title": "Value migration",
       "anchor": "value-migration",
-      "start_line": 185
+      "start_line": 193
     },
     {
-      "block_id": "b000076",
+      "block_id": "b000080",
       "parent_id": "b000001",
       "level": 2,
       "title": "Documentation entry points",
       "anchor": "documentation-entry-points",
-      "start_line": 200
+      "start_line": 208
     }
   ],
   "indexes": {
@@ -716,15 +744,15 @@
         "context": "paragraph"
       },
       {
-        "block_id": "b000071",
-        "line": 189,
+        "block_id": "b000075",
+        "line": 197,
         "text": "that shared Core values must migrate and rebuild because this changes source",
         "basis": "lexical_match",
         "context": "paragraph"
       },
       {
-        "block_id": "b000071",
-        "line": 192,
+        "block_id": "b000075",
+        "line": 200,
         "text": "this adapter is never included or linked by the base SDK. See",
         "basis": "lexical_match",
         "context": "paragraph"
@@ -803,45 +831,59 @@
       },
       {
         "block_id": "b000063",
-        "label": "MIT License",
+        "label": "Apache License, Version 2.0",
         "target": "LICENSE",
         "kind": "relative",
         "line": 172
       },
       {
-        "block_id": "b000071",
+        "block_id": "b000063",
+        "label": "NOTICE",
+        "target": "NOTICE",
+        "kind": "relative",
+        "line": 174
+      },
+      {
+        "block_id": "b000063",
+        "label": "docs/License.md",
+        "target": "docs/License.md",
+        "kind": "relative",
+        "line": 175
+      },
+      {
+        "block_id": "b000075",
         "label": "Core value adapter",
         "target": "example/CoreValue/",
         "kind": "relative",
-        "line": 191
+        "line": 199
       },
       {
-        "block_id": "b000071",
+        "block_id": "b000075",
         "label": "the independence contract",
         "target": "docs/sdk-independence.md",
         "kind": "relative",
-        "line": 193
+        "line": 201
       },
       {
-        "block_id": "b000078",
+        "block_id": "b000082",
         "label": "AGENT.md",
         "target": "AGENT.md",
         "kind": "relative",
-        "line": 203
+        "line": 211
       },
       {
-        "block_id": "b000078",
+        "block_id": "b000082",
         "label": "documentation index",
         "target": "docs/README.md",
         "kind": "relative",
-        "line": 204
+        "line": 212
       },
       {
-        "block_id": "b000078",
+        "block_id": "b000082",
         "label": "agent index",
         "target": "docs/agent-index.json",
         "kind": "relative",
-        "line": 205
+        "line": 213
       }
     ],
     "tables": []

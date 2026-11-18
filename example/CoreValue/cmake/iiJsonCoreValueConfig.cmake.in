@@ -1,4 +1,5 @@
 @PACKAGE_INIT@
+set(iiJsonCoreValue_SPDX_LICENSE "Apache-2.0")
 include(CMakeFindDependencyMacro)
 find_dependency(iiJson 0.1 CONFIG)
 find_dependency(iiSDKCore 0.14 CONFIG COMPONENTS Contracts)

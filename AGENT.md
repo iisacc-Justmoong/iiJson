@@ -13,6 +13,14 @@ iiJson은 Qt와 다른 SDK에 의존하지 않는 C++23 JSON 코덱과 도메인
 - 변경 후 빌드 및 CTest를 수행한다. 공개 헤더·ABI를 변경하면 라이브러리와 소비자를 함께 다시 빌드한다. `./install.sh`는 기본적으로 `build/install`에 설치하고 Qt·Threads·파일 공급자 탐색을 비활성화한 독립 소비자를 검증한다.
 - 다른 플랫폼의 이전 검증 기록은 이 변경의 실행 근거가 아니다. 실제 실행한 플랫폼, 소스 빌드, 설치 소비자 및 미검증 범위를 구분하여 보고한다.
 
+## 라이선스
+
+이 저장소의 iiJson 모듈은 Apache License 2.0이다. 자사 소스, 문서, 도구, 테스트가 포함된다. 저작권 표시는 `Copyright (c) 2026 iisacc`이고 고지는 루트 `NOTICE`에 있다. 사람용 한국어 설명은 [docs/License.md](docs/License.md)이다.
+
+`Product` 아래의 iisacc 제품은 GNU Affero General Public License(AGPL)이다.
+
+제3자와 벤더 코드는 원래 라이선스를 유지한다. 문서 재편 중에도 그 라이선스와 외부 원본은 보존한다.
+
 <!-- workspace-docs:agent:start -->
 ## 문서 구조와 에이전트 탐색
 
