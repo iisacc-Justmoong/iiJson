@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.31)
 project(iiJson VERSION 0.1.2 LANGUAGES CXX)
+include(./cmake/ModuleImports.cmake)
 option(BUILD_SHARED_LIBS "Build iiJson shared libraries" ON)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
