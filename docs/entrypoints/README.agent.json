@@ -10,8 +10,8 @@
   },
   "source": {
     "path": "README.md",
-    "sha256": "f25e4eef11a4f92fc186f362c84fea6d8c6a6dc8866d5a5b26e368ed1c751310",
-    "bytes": 10208,
+    "sha256": "3fa915d1316f3430ea1363e2f835d76d35b8d07fd9ec60006ae8355be520dfa2",
+    "bytes": 10244,
     "line_count": 206,
     "encoding": "utf-8",
     "language": "en"
@@ -440,7 +440,7 @@
       "kind": "paragraph",
       "start_line": 164,
       "end_line": 165,
-      "raw": "Original code is MIT; see `LICENSE`. Grammar reference:\n[RFC 8259](https://www.rfc-editor.org/rfc/rfc8259).\n"
+      "raw": "Original code is licensed under Apache 2.0. See `LICENSE`. Grammar reference:\n[RFC 8259](https://www.rfc-editor.org/rfc/rfc8259).\n"
     },
     {
       "id": "b000058",
@@ -470,7 +470,7 @@
       "kind": "paragraph",
       "start_line": 169,
       "end_line": 169,
-      "raw": "SPDX-License-Identifier: MIT\n"
+      "raw": "SPDX-License-Identifier: Apache-2.0\n"
     },
     {
       "id": "b000062",
@@ -484,7 +484,7 @@
       "kind": "paragraph",
       "start_line": 171,
       "end_line": 173,
-      "raw": "The original code and documentation in this repository are licensed under the\n[MIT License](LICENSE). Third-party code, libraries, fonts, tools, and model\nweights retain their respective licenses.\n"
+      "raw": "The original code and documentation in this repository are licensed under the\n[Apache License 2.0](LICENSE). Third-party code, libraries, fonts, tools, and model\nweights retain their respective licenses.\n"
     },
     {
       "id": "b000064",
@@ -803,7 +803,7 @@
       },
       {
         "block_id": "b000063",
-        "label": "MIT License",
+        "label": "Apache License 2.0",
         "target": "LICENSE",
         "kind": "relative",
         "line": 172
